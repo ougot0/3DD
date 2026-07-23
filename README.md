@@ -1,10 +1,10 @@
-# Studio 3DD — Boutique en ligne
+# ALYA — Boutique en ligne (impression 3D)
 
 Boutique de créations imprimées en 3D : figurines, accessoires et décorations murales,
-avec une section **sur mesure** pour les commandes personnalisées.
+avec commandes **sur mesure**, **panier**, pages **À propos**, **Contact** et **FAQ**.
 
-Site **100 % statique** (HTML / CSS / JavaScript) — aucune installation, aucun serveur
-compliqué. Il suffit d'ouvrir les fichiers dans un navigateur ou de les héberger.
+Site **100 % statique** (HTML / CSS / JavaScript) — aucune installation, aucun serveur.
+Il suffit d'ouvrir les fichiers dans un navigateur ou de les héberger.
 
 ---
 
@@ -14,64 +14,83 @@ compliqué. Il suffit d'ouvrir les fichiers dans un navigateur ou de les héberg
 |---|---|
 | `index.html` | Page d'accueil |
 | `boutique.html` | Tous les produits + filtres par catégorie |
-| `sur-mesure.html` | Page des commandes personnalisées (formulaire) |
-| **`js/products.js`** | **⭐ TES PRODUITS — c'est le seul fichier que tu gères** |
-| `js/app.js` | Moteur d'affichage (ne pas toucher) |
-| `css/styles.css` | Le style du site (ne pas toucher, sauf envie) |
-| `assets/img/` | Tes photos de produits vont ici |
+| `sur-mesure.html` | Page devis / commande personnalisée (formulaire complet) |
+| `a-propos.html` | Présentation de l'atelier |
+| `contact.html` | Coordonnées + formulaire de contact |
+| `faq.html` | Questions fréquentes |
+| `panier.html` | Le panier du client |
+| **`js/products.js`** | **⭐ TES PRODUITS — nom, photo, prix, lien Stripe** |
+| **`js/app.js`** | Moteur du site. En haut, le bloc **`SHOP`** = tes **coordonnées** (email, téléphone, adresse, réseaux) |
+| `css/styles.css` | Le style du site |
+| `assets/img/` | Tes photos de produits |
+
+> 💡 Le **menu**, le **pied de page**, le **nom (ALYA)** et les **coordonnées** sont
+> gérés à un seul endroit (`js/app.js`, bloc `SHOP` + `NAV`). Tu changes une fois,
+> c'est appliqué sur toutes les pages.
 
 ---
 
-## ✏️ Comment gérer tes produits (le seul truc à connaître)
+## ✏️ Gérer tes produits — `js/products.js`
 
-Tout se passe dans **`js/products.js`**. Chaque produit ressemble à ça :
+Chaque produit :
 
 ```js
 {
-  name: "Chevalier Pixel",          // le nom
-  price: 24.90,                     // le prix (juste le nombre)
+  name: "Buste Athéna",             // le nom
+  price: 34.90,                     // le prix (juste le nombre)
   oldPrice: null,                   // ancien prix barré, ou null
   category: "figurines",            // "figurines", "accessoires" ou "decorations"
-  badge: "Top vente",               // étiquette ("Nouveau", "Promo"…) ou null
+  badge: "Populaire",               // étiquette ("Nouveau", "Populaire") ou null
   image: "",                        // chemin de ta photo (voir plus bas)
-  description: "Un petit chevalier rétro.",
+  description: "Un buste élégant.",
   stripe: ""                        // TON lien de paiement Stripe
 },
 ```
 
-### Ajouter une photo
-1. Mets ta photo dans le dossier `assets/img/` (ex : `chevalier.jpg`).
-2. Dans le produit, écris : `image: "assets/img/chevalier.jpg",`
-3. Tant que `image` reste `""`, une image d'attente colorée s'affiche automatiquement.
-   👉 Le site est donc déjà présentable même sans photos.
+- **Photo** : mets ton image dans `assets/img/` puis écris `image: "assets/img/ma-photo.jpg"`.
+  Tant que c'est vide, un visuel d'attente élégant s'affiche automatiquement.
+- **Lien Stripe** : colle ton lien de paiement dans `stripe: "https://buy.stripe.com/xxxx"`.
+  Il apparaît alors comme bouton **« Payer »** dans le panier.
+- **Ajouter / supprimer** : copie ou efface un bloc `{ ... }` (garde les virgules).
 
-### Ajouter ton lien de paiement Stripe
-1. Crée ton lien de paiement dans Stripe (Payment Link).
-2. Copie-le entre les guillemets : `stripe: "https://buy.stripe.com/xxxxx",`
-3. Tant que `stripe` reste `""`, le bouton affiche **« Bientôt disponible »**.
-   Dès que tu colles le lien, il devient un bouton **« Acheter »** qui ouvre Stripe. ✅
+---
 
-### Ajouter / supprimer un produit
-- **Ajouter** : copie un bloc `{ ... }`, colle-le, modifie-le. (Garde la virgule entre chaque bloc.)
-- **Supprimer** : efface le bloc `{ ... }` du produit.
+## ⚙️ Tes coordonnées — `js/app.js` (bloc `SHOP`)
+
+```js
+const SHOP = {
+  name:    "ALYA",
+  tagline: "Impression 3D",
+  email:   "contact@alya.fr",     // ← ton vrai email
+  phone:   "+33 6 00 00 00 00",    // ← ton vrai téléphone
+  address: "Adresse à compléter",  // ← optionnel
+  instagram: "",                    // ← lien Instagram (optionnel)
+  tiktok:    ""                     // ← lien TikTok (optionnel)
+};
+```
+
+Ces infos alimentent le pied de page, la page Contact et les formulaires.
+
+---
+
+## 🛒 Le panier & le paiement
+
+- Le client ajoute des articles au panier (mémorisé dans son navigateur).
+- Dans le panier, chaque article se règle via **son lien de paiement Stripe**.
+- Un **paiement groupé** (tout payer en une fois) nécessite Stripe Checkout avec une
+  petite fonction serveur — faisable dans un second temps si tu le souhaites.
 
 ---
 
 ## 👀 Voir le site en local
 
-Double-clique simplement sur `index.html` pour l'ouvrir dans ton navigateur.
+Double-clique sur `index.html`, ou lance un petit serveur :
+`python3 -m http.server` puis ouvre `http://localhost:8000`.
 
-(Pour un rendu 100 % fidèle, tu peux aussi lancer un petit serveur local :
-`python3 -m http.server` puis ouvre `http://localhost:8000`.)
+## 🚀 Mettre en ligne
 
----
-
-## 🚀 Mettre le site en ligne
-
-Ce site fonctionne sur n'importe quel hébergement statique gratuit :
-**GitHub Pages**, **Netlify**, **Vercel** ou **Cloudflare Pages**.
-Tu déposes les fichiers, et c'est en ligne.
+Hébergement statique gratuit : **GitHub Pages**, **Netlify**, **Vercel** ou **Cloudflare Pages**.
 
 ---
 
-Fait avec 💜 pour Studio 3DD.
+Fait avec 💜 pour ALYA.

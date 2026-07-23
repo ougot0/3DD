@@ -3,38 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sur mesure — Studio 3DD</title>
-  <meta name="description" content="Commandez votre création 3D sur mesure : figurine personnalisée, personnage unique, objet à la demande. Devis gratuit.">
+  <title>Sur mesure & devis — ALYA</title>
+  <meta name="description" content="Commandez votre création 3D sur mesure chez ALYA : figurine personnalisée, personnage unique, objet à la demande. Devis gratuit.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="index.html">
-        <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2v18M4 6.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-        <span>Studio&nbsp;3DD<small>Impression 3D</small></span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="sur-mesure.html" class="active">Sur mesure</a>
-        <a href="index.html#faq">FAQ</a>
-      </nav>
-      <div class="nav-right">
-        <button class="icon-btn" id="theme-toggle" aria-label="Basculer le thème clair / sombre">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        </button>
-        <a class="btn btn-primary" href="#devis">Demander un devis</a>
-        <button class="icon-btn nav-toggle" aria-label="Menu">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+  <header id="site-header"></header>
 
   <!-- ===== HERO ===== -->
   <section class="hero">
@@ -44,7 +21,7 @@
         <h1>Votre idée, <em>imprimée en 3D</em>.</h1>
         <p class="lead">Une figurine à votre effigie, le personnage de vos rêves, un cadeau qui n'existe nulle part ailleurs. Vous décrivez, on modélise, on imprime. Devis gratuit et sans engagement.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#devis">Demander un devis</a>
+          <a class="btn btn-primary" href="#devis">Remplir ma demande</a>
           <a class="btn btn-ghost" href="boutique.html">Voir la boutique</a>
         </div>
         <div class="hero-meta">
@@ -63,7 +40,7 @@
     </div>
   </section>
 
-  <!-- ===== PROCÉDÉ DÉTAILLÉ ===== -->
+  <!-- ===== PROCÉDÉ ===== -->
   <section id="procede">
     <div class="wrap">
       <div class="head center reveal">
@@ -75,17 +52,17 @@
         <div class="guarantee reveal">
           <div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 3V5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
           <h3>01 — Décrivez votre idée</h3>
-          <p>Envoyez-nous une photo, un personnage, un objet ou simplement quelques mots sur ce que vous imaginez. Taille, couleur, style : tout compte.</p>
+          <p>Envoyez-nous une photo, un personnage, un objet ou simplement quelques mots. Taille, couleur, style : tout compte.</p>
         </div>
         <div class="guarantee reveal">
           <div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 3v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
           <h3>02 — On modélise & on valide</h3>
-          <p>On crée le modèle 3D et on vous montre un aperçu. On ajuste ensemble jusqu'à ce que le résultat soit parfait — vous validez avant l'impression.</p>
+          <p>On crée le modèle 3D et on vous montre un aperçu. On ajuste ensemble : vous validez avant l'impression.</p>
         </div>
         <div class="guarantee reveal">
           <div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="17" r="1.6" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="17" r="1.6" stroke="currentColor" stroke-width="1.5"/></svg></div>
           <h3>03 — On imprime & on expédie</h3>
-          <p>On imprime votre pièce, on la finit à la main et on l'emballe avec soin avant de vous l'envoyer. Elle n'existe qu'en un seul exemplaire : le vôtre.</p>
+          <p>On imprime votre pièce, on la finit à la main et on l'emballe avec soin. Elle n'existe qu'en un seul exemplaire : le vôtre.</p>
         </div>
       </div>
     </div>
@@ -95,73 +72,57 @@
   <section id="devis" style="padding-top:0;">
     <div class="wrap">
       <div class="head center reveal">
-        <span class="eyebrow" style="justify-content:center">Démarrer un projet</span>
-        <h2>Demandez votre devis gratuit</h2>
-        <p>Remplissez ce formulaire : on revient vers vous rapidement avec une proposition et un prix.</p>
+        <span class="eyebrow" style="justify-content:center">Votre demande de devis</span>
+        <h2>Parlez-nous de votre projet</h2>
+        <p>Tous les champs marqués d'un <span class="req">*</span> sont obligatoires. Plus vous nous en dites, plus notre réponse sera précise.</p>
       </div>
-      <form class="form-card reveal" action="mailto:contact@studio3dd.fr" method="post" enctype="text/plain">
+      <form class="form-card reveal" data-mailto data-subject="Demande de devis sur mesure — ALYA">
         <div class="form-row two">
           <div class="form-row" style="margin:0;">
-            <label for="nom">Votre nom</label>
-            <input type="text" id="nom" name="nom" placeholder="Prénom et nom" required>
+            <label for="nom">Nom et prénom <span class="req">*</span></label>
+            <input type="text" id="nom" name="Nom" placeholder="Votre nom complet" required>
           </div>
           <div class="form-row" style="margin:0;">
-            <label for="email">Votre email</label>
-            <input type="email" id="email" name="email" placeholder="vous@email.com" required>
+            <label for="email">Adresse email <span class="req">*</span></label>
+            <input type="email" id="email" name="Email" placeholder="vous@email.com" required>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-row" style="margin:0;">
+            <label for="tel">Téléphone <span class="req">*</span></label>
+            <input type="tel" id="tel" name="Téléphone" placeholder="06 12 34 56 78" pattern="[0-9 +().-]{6,}" required>
+          </div>
+          <div class="form-row" style="margin:0;">
+            <label for="type">Type de projet <span class="req">*</span></label>
+            <select id="type" name="Type de projet" required>
+              <option value="">Choisir…</option>
+              <option>Figurine personnalisée</option>
+              <option>Personnage / création originale</option>
+              <option>Accessoire sur mesure</option>
+              <option>Décoration murale</option>
+              <option>Autre idée</option>
+            </select>
           </div>
         </div>
         <div class="form-row">
-          <label for="type">Type de projet</label>
-          <select id="type" name="type">
-            <option>Figurine personnalisée</option>
-            <option>Personnage / création originale</option>
-            <option>Accessoire sur mesure</option>
-            <option>Décoration murale</option>
-            <option>Autre idée</option>
-          </select>
+          <label for="idee">Description complète de votre projet <span class="req">*</span></label>
+          <textarea id="idee" name="Description" rows="6" placeholder="Décrivez précisément ce que vous imaginez : sujet, taille, couleurs, style, ressemblance, quantité, échéance souhaitée…" required></textarea>
         </div>
         <div class="form-row">
-          <label for="idee">Décrivez votre idée</label>
-          <textarea id="idee" name="idee" rows="5" placeholder="Expliquez-nous ce que vous imaginez : taille, couleurs, style, ressemblance… tous les détails nous aident !" required></textarea>
+          <label for="photo">Photo ou visuel de référence <span class="req">*</span></label>
+          <input type="file" id="photo" name="photo" accept="image/*" required>
+          <span class="form-hint">Une photo, un croquis ou une image d'inspiration nous aide énormément.</span>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Envoyer ma demande</button>
-        <p class="form-note">Ou écrivez-nous directement à <a href="mailto:contact@studio3dd.fr" style="color:var(--accent);font-weight:600;">contact@studio3dd.fr</a></p>
+        <button type="submit" class="btn btn-primary btn-block">Envoyer ma demande de devis</button>
+        <p class="form-note">
+          En envoyant, votre messagerie s'ouvre avec votre demande pré-remplie — <b>pensez à joindre votre photo à l'email</b>.<br>
+          Vous pouvez aussi nous écrire directement à <a data-shop="email" href="#" style="color:var(--accent);font-weight:600;">contact@alya.fr</a> ou nous appeler au <a data-shop="phone" href="#" style="color:var(--accent);font-weight:600;">+33 6 00 00 00 00</a>.
+        </p>
       </form>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer" id="contact">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2v18M4 6.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span>Studio&nbsp;3DD</span></a>
-          <p style="margin-top:14px;">Objets et figurines imprimés en 3D, façonnés avec soin dans notre atelier. Créations originales et pièces sur mesure.</p>
-        </div>
-        <div>
-          <h4>Boutique</h4>
-          <a href="boutique.html?cat=figurines">Figurines</a>
-          <a href="boutique.html?cat=accessoires">Accessoires</a>
-          <a href="boutique.html?cat=decorations">Décorations murales</a>
-        </div>
-        <div>
-          <h4>Studio</h4>
-          <a href="sur-mesure.html">Sur mesure</a>
-          <a href="index.html#garanties">Nos garanties</a>
-          <a href="index.html#faq">FAQ</a>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <a href="mailto:contact@studio3dd.fr">contact@studio3dd.fr</a>
-          <p>On répond avec plaisir.</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span id="year">2026</span> Studio 3DD. Tous droits réservés.</span>
-        <span class="secure"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.6"/></svg> Paiement sécurisé via Stripe</span>
-      </div>
-    </div>
-  </footer>
+  <footer id="site-footer"></footer>
 
   <script src="js/products.js"></script>
   <script src="js/app.js"></script>
