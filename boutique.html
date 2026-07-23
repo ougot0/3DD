@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique — Studio 3DD</title>
+  <meta name="description" content="Tous nos produits imprimés en 3D : figurines, accessoires et décorations murales. Filtre par catégorie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="logo" href="index.html">
+        <span class="cube">3D</span> Studio&nbsp;<b>3DD</b>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="boutique.html" class="active">Boutique</a>
+        <a href="sur-mesure.html">Sur mesure</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- ===== EN-TÊTE BOUTIQUE ===== -->
+  <section class="hero" style="padding:0;">
+    <div class="wrap" style="position:relative; padding:56px 0;">
+      <div class="section-head" style="margin-bottom:0;">
+        <span class="kicker">▶ NIVEAU BOUTIQUE</span>
+        <h2>Tous nos produits</h2>
+        <p>Choisis une catégorie et trouve la pièce qui te fait vibrer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUITS ===== -->
+  <section>
+    <div class="wrap">
+      <div class="filters" id="filters"></div>
+      <div class="product-grid" id="shop-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== SUR MESURE CTA ===== -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="custom">
+        <div>
+          <span class="kicker">▶ MODE PERSONNALISÉ</span>
+          <h2>Tu ne trouves pas ton bonheur ?</h2>
+          <p>On crée ta pièce sur mesure : figurine personnalisée, objet unique, cadeau original… dis-nous tout.</p>
+          <a class="btn btn-primary" href="sur-mesure.html">Demander un devis</a>
+        </div>
+        <div class="custom-steps">
+          <div class="step"><span class="n">1</span><span>Décris ton idée</span></div>
+          <div class="step"><span class="n">2</span><span>On modélise l'aperçu</span></div>
+          <div class="step"><span class="n">3</span><span>On imprime ta pièce unique</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span class="cube">3D</span> Studio&nbsp;<b>3DD</b></a>
+          <p style="margin-top:12px;">Figurines, accessoires et décorations imprimés en 3D. Créations originales et sur mesure.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <a href="boutique.html?cat=figurines">Figurines</a>
+          <a href="boutique.html?cat=accessoires">Accessoires</a>
+          <a href="boutique.html?cat=decorations">Décorations murales</a>
+          <a href="sur-mesure.html">Sur mesure</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:contact@studio3dd.fr">contact@studio3dd.fr</a>
+          <p>Une question ? On répond avec plaisir.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Studio 3DD. Tous droits réservés.</span>
+        <span>Fait avec 💜 et une imprimante 3D.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
