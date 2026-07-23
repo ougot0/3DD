@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio 3DD — Figurines, accessoires & déco imprimés en 3D</title>
-  <meta name="description" content="Figurines, accessoires et décorations murales imprimés en 3D. Créations originales et modèles sur mesure à la demande.">
+  <title>Studio 3DD — Objets & figurines imprimés en 3D</title>
+  <meta name="description" content="Figurines, accessoires et décorations murales imprimés en 3D avec soin. Créations originales et pièces personnalisées sur mesure.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
@@ -14,121 +14,166 @@
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="wrap nav">
-      <a class="logo" href="index.html">
-        <span class="cube">3D</span> Studio&nbsp;<b>3DD</b>
+      <a class="brand" href="index.html">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2v18M4 6.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <span>Studio&nbsp;3DD<small>Impression 3D</small></span>
       </a>
       <nav class="nav-links">
         <a href="index.html" class="active">Accueil</a>
         <a href="boutique.html">Boutique</a>
         <a href="sur-mesure.html">Sur mesure</a>
-        <a href="boutique.html#contact">Contact</a>
+        <a href="#faq">FAQ</a>
       </nav>
-      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <div class="nav-right">
+        <button class="icon-btn" id="theme-toggle" aria-label="Basculer le thème clair / sombre">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </button>
+        <a class="btn btn-primary" href="boutique.html">Boutique</a>
+        <button class="icon-btn nav-toggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <div>
-        <span class="tagline">▶ INSÉRER UNE PIÈCE · CRÉATIONS 3D</span>
-        <h1>Des créations 3D <span class="glow">qui ont du niveau</span>.</h1>
-        <p>Figurines, accessoires et décorations murales imprimés en 3D. Des modèles originaux… et ta propre figurine personnalisée sur demande.</p>
+      <div class="reveal in">
+        <span class="eyebrow">Atelier d'impression 3D</span>
+        <h1>Des objets <em>imprimés en 3D</em>, pensés pour durer.</h1>
+        <p class="lead">Figurines, accessoires et décorations murales façonnés avec soin dans notre atelier. Chaque pièce est imprimée puis finie à la main — et si vous rêvez d'une création unique, on la fabrique sur mesure.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="boutique.html">Voir la boutique</a>
-          <a class="btn btn-ghost" href="sur-mesure.html">Commande sur mesure</a>
+          <a class="btn btn-primary" href="boutique.html">Découvrir la boutique</a>
+          <a class="btn btn-ghost" href="sur-mesure.html">Créer sur mesure</a>
+        </div>
+        <div class="hero-meta">
+          <div class="stat"><b>3</b><span>univers de créations</span></div>
+          <div class="stat"><b>100 %</b><span>fini à la main</span></div>
+          <div class="stat"><b>Sur&nbsp;mesure</b><span>selon vos idées</span></div>
         </div>
       </div>
-      <div class="hero-art">
-        <span class="float-badge a">★ FAIT MAIN</span>
-        <span class="float-badge b">100% 3D</span>
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Figurine 3D">
-          <circle cx="100" cy="66" r="34" fill="#7c3aed"/>
-          <rect x="66" y="98" width="68" height="70" rx="20" fill="#ff4d9d"/>
-          <circle cx="88" cy="62" r="6" fill="#fff"/><circle cx="112" cy="62" r="6" fill="#fff"/>
-          <circle cx="88" cy="62" r="2.5" fill="#1d1b2e"/><circle cx="112" cy="62" r="2.5" fill="#1d1b2e"/>
-          <path d="M88 78 q12 10 24 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <rect x="52" y="112" width="18" height="46" rx="9" fill="#7c3aed"/>
-          <rect x="130" y="112" width="18" height="46" rx="9" fill="#7c3aed"/>
-          <rect x="90" y="30" width="20" height="10" rx="5" fill="#ffd23f"/>
-        </svg>
+      <div class="hero-visual reveal in">
+        <div class="hero-frame" data-cat-art="figurines"></div>
+        <div class="hero-tag">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><b>Finition soignée</b><span>ponçage & contrôle de chaque pièce</span></div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- ===== BANDE DE CONFIANCE ===== -->
+  <div class="trust-strip">
+    <div class="wrap">
+      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v6c0 4-3 6.5-7 8-4-1.5-7-4-7-8V7l7-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><b>Impression haute résolution</b><span>détails nets, finition mate</span></div></div>
+      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 8l8-4 8 4-8 4-8-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><b>Fabriqué à la commande</b><span>pas de surstock, zéro gaspillage</span></div></div>
+      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17" r="1.6" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="17" r="1.6" stroke="currentColor" stroke-width="1.6"/></svg></span><div><b>Expédition soignée</b><span>emballage protecteur & suivi</span></div></div>
+      <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.6"/></svg></span><div><b>Paiement sécurisé</b><span>transactions chiffrées via Stripe</span></div></div>
+    </div>
+  </div>
 
   <!-- ===== CATÉGORIES ===== -->
   <section id="categories">
     <div class="wrap">
-      <div class="section-head">
-        <span class="kicker">CHOISIS TON UNIVERS</span>
-        <h2>Nos catégories</h2>
-        <p>Trois familles de créations, imprimées avec soin et prêtes à rejoindre ton étagère.</p>
+      <div class="head center reveal">
+        <span class="eyebrow" style="justify-content:center">Nos univers</span>
+        <h2>Trouvez la pièce qui vous ressemble</h2>
+        <p>Trois familles de créations imprimées en 3D, à offrir ou à s'offrir.</p>
       </div>
       <div class="cat-grid">
-        <a class="cat-card" href="boutique.html?cat=figurines">
-          <span class="ico"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="13" r="8" fill="#7c3aed"/><rect x="11" y="21" width="18" height="15" rx="5" fill="#ff4d9d"/></svg></span>
-          <h3>Figurines</h3>
-          <p>Personnages, animaux et créatures à collectionner.</p>
-          <span class="go">Découvrir →</span>
+        <a class="cat-card reveal" href="boutique.html?cat=figurines">
+          <div class="cat-art" data-cat-art="figurines"></div>
+          <div class="cat-body"><h3>Figurines</h3><p>Personnages, animaux et pièces de collection à exposer.</p><span class="link">Découvrir <span class="arrow">→</span></span></div>
         </a>
-        <a class="cat-card" href="boutique.html?cat=accessoires">
-          <span class="ico"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="16" rx="6" fill="#7c3aed"/><circle cx="14" cy="20" r="3" fill="#ffd23f"/><rect x="23" y="17" width="6" height="6" rx="2" fill="#22d3ee"/></svg></span>
-          <h3>Accessoires</h3>
-          <p>Porte-clés, supports et objets malins du quotidien.</p>
-          <span class="go">Découvrir →</span>
+        <a class="cat-card reveal" href="boutique.html?cat=accessoires">
+          <div class="cat-art" data-cat-art="accessoires"></div>
+          <div class="cat-body"><h3>Accessoires</h3><p>Objets malins et élégants pour le bureau et la maison.</p><span class="link">Découvrir <span class="arrow">→</span></span></div>
         </a>
-        <a class="cat-card" href="boutique.html?cat=decorations">
-          <span class="ico"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 L24 16 L35 17 L27 24 L29 35 L20 29 L11 35 L13 24 L5 17 L16 16 Z" fill="#ffd23f" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round"/></svg></span>
-          <h3>Décorations murales</h3>
-          <p>Cadres, panneaux et pièces déco pour habiller tes murs.</p>
-          <span class="go">Découvrir →</span>
+        <a class="cat-card reveal" href="boutique.html?cat=decorations">
+          <div class="cat-art" data-cat-art="decorations"></div>
+          <div class="cat-body"><h3>Décorations murales</h3><p>Reliefs et panneaux pour habiller vos murs avec caractère.</p><span class="link">Découvrir <span class="arrow">→</span></span></div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRODUITS MIS EN AVANT ===== -->
-  <section id="featured" style="padding-top:0;">
+  <!-- ===== SÉLECTION ===== -->
+  <section id="selection" style="padding-top:0;">
     <div class="wrap">
-      <div class="section-head">
-        <span class="kicker">SÉLECTION DU MOMENT</span>
-        <h2>Nos coups de cœur</h2>
-        <p>Un aperçu de la boutique. Les préférés de nos clients, à saisir dès maintenant.</p>
-      </div>
-      <div class="product-grid" id="featured-grid"></div>
-      <div style="text-align:center; margin-top:34px;">
-        <a class="btn btn-primary" href="boutique.html">Voir tous les produits</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SUR MESURE ===== -->
-  <section id="sur-mesure-cta">
-    <div class="wrap">
-      <div class="custom">
-        <div>
-          <span class="kicker">▶ MODE PERSONNALISÉ</span>
-          <h2>Ta figurine, sur mesure.</h2>
-          <p>Envie d'une figurine à ton image, d'un personnage unique ou d'un cadeau qui n'existe nulle part ailleurs ? On modélise et on imprime ton idée en 3D.</p>
-          <a class="btn btn-primary" href="sur-mesure.html">Demander un devis</a>
+      <div class="head-row reveal">
+        <div class="head" style="margin-bottom:0;">
+          <span class="eyebrow">Sélection</span>
+          <h2>Nos pièces préférées</h2>
         </div>
-        <div class="custom-steps">
-          <div class="step"><span class="n">1</span><span>Tu nous décris ton idée (photo, personnage, objet…)</span></div>
-          <div class="step"><span class="n">2</span><span>On modélise et on te montre un aperçu</span></div>
-          <div class="step"><span class="n">3</span><span>On imprime et on t'envoie ta pièce unique</span></div>
+        <a class="btn btn-ghost" href="boutique.html">Voir toute la boutique</a>
+      </div>
+      <div class="product-grid" id="featured-grid" style="margin-top:40px;"></div>
+    </div>
+  </section>
+
+  <!-- ===== SUR MESURE (PROCÉDÉ) ===== -->
+  <section id="sur-mesure">
+    <div class="wrap">
+      <div class="process reveal">
+        <div class="process-inner">
+          <div>
+            <span class="eyebrow">Sur mesure</span>
+            <h2>Votre idée, imprimée rien que pour vous.</h2>
+            <p class="lead">Une figurine à votre effigie, un personnage unique, un cadeau qui n'existe nulle part ailleurs. Décrivez votre projet : on le modélise, on vous montre un aperçu, puis on l'imprime.</p>
+            <a class="btn btn-primary" href="sur-mesure.html">Demander un devis gratuit</a>
+          </div>
+          <div class="steps">
+            <div class="step"><span class="num">01</span><div><b>Vous décrivez votre idée</b><span>Une photo, un personnage, un objet, une envie.</span></div></div>
+            <div class="step"><span class="num">02</span><div><b>On modélise & on valide ensemble</b><span>Vous recevez un aperçu 3D, on ajuste jusqu'au détail.</span></div></div>
+            <div class="step"><span class="num">03</span><div><b>On imprime & on expédie</b><span>Votre pièce unique, emballée avec soin.</span></div></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONFIANCE ===== -->
-  <section id="confiance" style="padding-top:0;">
+  <!-- ===== GARANTIES ===== -->
+  <section id="garanties" style="padding-top:0;">
     <div class="wrap">
-      <div class="trust">
-        <div class="item"><div class="ti">🖨️</div><b>Imprimé en 3D</b><span>Fabrication soignée</span></div>
-        <div class="item"><div class="ti">🎨</div><b>Sur mesure</b><span>Tes idées en vrai</span></div>
-        <div class="item"><div class="ti">📦</div><b>Envoi soigné</b><span>Emballé avec soin</span></div>
-        <div class="item"><div class="ti">💜</div><b>Fait avec passion</b><span>Petit studio, grand cœur</span></div>
+      <div class="head center reveal">
+        <span class="eyebrow" style="justify-content:center">Pourquoi nous faire confiance</span>
+        <h2>Le soin du détail, à chaque étape</h2>
+      </div>
+      <div class="guarantee-grid">
+        <div class="guarantee reveal"><div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9L9.5 8 12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div><h3>Une finition à la main</h3><p>Chaque pièce est poncée, nettoyée et contrôlée avant l'envoi. Pas de bavure, pas d'à-peu-près.</p></div>
+        <div class="guarantee reveal"><div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7l8-4 8 4v10l-8 4-8-4V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 7l8 4 8-4M12 11v10" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div><h3>Des matériaux durables</h3><p>Nous imprimons dans des matières solides et stables, pensées pour tenir dans le temps.</p></div>
+        <div class="guarantee reveal"><div class="g-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.5 8.5 0 11-4.6-7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 12l2.5 2.5L21 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Satisfait ou refait</h3><p>Un souci sur votre commande ? On la refait. Votre satisfaction passe avant tout.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" style="justify-content:center">Questions fréquentes</span>
+        <h2>Tout ce qu'il faut savoir</h2>
+      </div>
+      <div class="faq reveal">
+        <details open><summary>Quels sont les délais de fabrication ?<span class="plus"></span></summary><div class="answer">Nos pièces étant imprimées à la commande, comptez généralement quelques jours de fabrication avant expédition. Pour une création sur mesure, le délai dépend du projet — on vous l'indique dès le devis.</div></details>
+        <details><summary>Comment se passe le paiement ?<span class="plus"></span></summary><div class="answer">Le paiement est 100 % sécurisé et traité par Stripe. Vos données bancaires sont chiffrées et ne transitent jamais en clair par notre site.</div></details>
+        <details><summary>Puis-je personnaliser une pièce ?<span class="plus"></span></summary><div class="answer">Oui ! C'est même notre spécialité. Rendez-vous sur la page « Sur mesure » pour nous décrire votre idée : figurine personnalisée, couleur, taille, gravure…</div></details>
+        <details><summary>Et si ma commande arrive abîmée ?<span class="plus"></span></summary><div class="answer">Chaque envoi est emballé pour voyager en sécurité. En cas de problème à la réception, contactez-nous : on remplace la pièce sans discuter.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BANNIÈRE CTA ===== -->
+  <section id="cta">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <h2>Prêt à donner vie à vos idées ?</h2>
+        <p>Parcourez la boutique ou lancez votre projet sur mesure. On s'occupe du reste.</p>
+        <div class="hero-cta" style="justify-content:center;">
+          <a class="btn btn-primary" href="boutique.html">Voir la boutique</a>
+          <a class="btn btn-ghost" href="sur-mesure.html">Demander un devis</a>
+        </div>
       </div>
     </div>
   </section>
@@ -137,26 +182,31 @@
   <footer class="site-footer" id="contact">
     <div class="wrap">
       <div class="footer-grid">
-        <div>
-          <a class="logo" href="index.html"><span class="cube">3D</span> Studio&nbsp;<b>3DD</b></a>
-          <p style="margin-top:12px;">Figurines, accessoires et décorations imprimés en 3D. Créations originales et sur mesure.</p>
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2v18M4 6.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span>Studio&nbsp;3DD</span></a>
+          <p style="margin-top:14px;">Objets et figurines imprimés en 3D, façonnés avec soin dans notre atelier. Créations originales et pièces sur mesure.</p>
         </div>
         <div>
           <h4>Boutique</h4>
           <a href="boutique.html?cat=figurines">Figurines</a>
           <a href="boutique.html?cat=accessoires">Accessoires</a>
           <a href="boutique.html?cat=decorations">Décorations murales</a>
+        </div>
+        <div>
+          <h4>Studio</h4>
           <a href="sur-mesure.html">Sur mesure</a>
+          <a href="#garanties">Nos garanties</a>
+          <a href="#faq">FAQ</a>
         </div>
         <div>
           <h4>Contact</h4>
           <a href="mailto:contact@studio3dd.fr">contact@studio3dd.fr</a>
-          <p>Une question ? On répond avec plaisir.</p>
+          <p>On répond avec plaisir.</p>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© <span id="year">2026</span> Studio 3DD. Tous droits réservés.</span>
-        <span>Fait avec 💜 et une imprimante 3D.</span>
+        <span class="secure"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.6"/></svg> Paiement sécurisé via Stripe</span>
       </div>
     </div>
   </footer>
