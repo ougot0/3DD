@@ -5,7 +5,7 @@
    éditoriale. Sobre, chaleureux, digne de confiance.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
 :root {
   /* Neutres */
@@ -475,4 +475,101 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.1
   .qty { grid-area: qty; justify-self: start; }
   .cart-line-total { grid-area: total; }
   .cart-line-actions { grid-area: act; flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+/* =========================================================
+   ÉNERGIE « TECH PREMIUM » + INTRO IMPRIMANTE 3D
+   Sobre, mais avec une pointe de folie & de technologie.
+   ========================================================= */
+:root {
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --grad:     linear-gradient(120deg, #4a54c9 0%, #7c5cf0 50%, #28b6d8 100%);
+  --grad-btn: linear-gradient(120deg, #3b45a3 0%, #6a4fce 55%, #2f9ac4 100%);
+  --glow: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+:root[data-theme="dark"], html[data-theme="dark"] {
+  --grad:     linear-gradient(120deg, #8b93ff 0%, #b596ff 50%, #71e3f2 100%);
+  --grad-btn: linear-gradient(120deg, #5560d6 0%, #8a6cf0 55%, #3fb6da 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --grad:     linear-gradient(120deg, #8b93ff 0%, #b596ff 50%, #71e3f2 100%);
+    --grad-btn: linear-gradient(120deg, #5560d6 0%, #8a6cf0 55%, #3fb6da 100%);
+  }
+}
+
+/* Respiration : plus d'air */
+section { padding: 104px 0; }
+
+/* Étiquettes en mono technique, encre dégradée */
+.eyebrow { font-family: var(--mono); font-weight: 600; font-size: .72rem; letter-spacing: .16em;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.eyebrow::before { background: var(--grad); }
+
+/* Titres : mot mis en avant en dégradé */
+.hero h1 em { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Boutons principaux : dégradé tech + halo (le côté sobre reste sur les boutons "ghost") */
+.btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 10px 26px var(--glow); }
+.btn-primary:hover { box-shadow: 0 16px 36px var(--glow); }
+
+/* Halos lumineux animés dans le hero */
+.hero-inner { position: relative; z-index: 1; }
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; filter: blur(64px); pointer-events: none; z-index: 0; }
+.hero::before { width: 520px; height: 520px; background: radial-gradient(circle, rgba(108,79,224,.34), transparent 68%); top: -170px; right: -60px; animation: orb1 16s ease-in-out infinite; }
+.hero::after  { width: 440px; height: 440px; background: radial-gradient(circle, rgba(40,182,216,.30), transparent 68%); bottom: -160px; left: -70px; animation: orb2 19s ease-in-out infinite; }
+@keyframes orb1 { 50% { transform: translate(-40px, 50px) scale(1.1); } }
+@keyframes orb2 { 50% { transform: translate(50px, -40px) scale(1.08); } }
+
+/* Cadre hero : léger flottement */
+.hero-frame { animation: floaty 7s ease-in-out infinite; }
+@keyframes floaty { 50% { transform: translateY(-12px); } }
+
+/* Cartes : liseré dégradé au survol + halo discret */
+.card { position: relative; }
+.card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; z-index: 3; }
+.card:hover::before { transform: scaleX(1); }
+.card:hover { box-shadow: var(--shadow), 0 0 0 1px var(--glow); }
+
+/* Nav active : soulignement dégradé */
+.nav-links a.active { position: relative; color: var(--ink); }
+.nav-links a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--grad); }
+
+/* Badge panier + petites données */
+.cart-count { background: var(--grad); }
+.hero-meta .stat span { font-family: var(--mono); text-transform: uppercase; letter-spacing: .05em; font-size: .72rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .hero::after, .hero-frame { animation: none; }
+}
+
+/* ---------- Intro : imprimante 3D qui imprime le logo ---------- */
+.intro { position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; }
+.intro.hide { opacity: 0; pointer-events: none; transition: opacity .55s ease; }
+.intro-stage { position: relative; width: 340px; height: 210px; color: var(--ink); }
+.intro-stage::before, .intro-stage::after { content: ""; position: absolute; top: 4px; bottom: 16px; width: 4px; border-radius: 4px; background: var(--line); }
+.intro-stage::before { left: 22px; } .intro-stage::after { right: 22px; }
+.intro-plate { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 252px; height: 8px; border-radius: 5px; background: var(--ink); opacity: .16; }
+.intro-word { position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
+  font-family: var(--display); font-weight: 800; font-size: 92px; line-height: 1; letter-spacing: -.04em;
+  background: var(--grad-btn); -webkit-background-clip: text; background-clip: text; color: transparent;
+  clip-path: inset(100% 0 0 0); animation: printLayers 1.9s steps(22) .35s forwards;
+  filter: drop-shadow(0 8px 22px var(--glow)); }
+.intro-head { position: absolute; left: 0; right: 0; top: 0; transform: translateY(152px); animation: headRise 1.9s linear .35s forwards; }
+.intro-head::before { content: ""; position: absolute; left: 16px; right: 16px; top: 8px; height: 5px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--line), color-mix(in srgb, var(--accent) 30%, var(--line)), var(--line)); }
+.intro-nozzle { position: absolute; left: 50%; margin-left: -16px; top: 4px; animation: sweepX .5s ease-in-out .35s infinite alternate; }
+.intro-nozzle svg { width: 32px; height: 40px; display: block; color: var(--ink); }
+.intro-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .42em; text-transform: uppercase; color: var(--muted);
+  opacity: 0; animation: introTag .5s ease 1.95s forwards; }
+@keyframes printLayers { to { clip-path: inset(0 0 0 0); } }
+@keyframes headRise   { from { transform: translateY(152px); } to { transform: translateY(4px); } }
+@keyframes sweepX     { from { transform: translateX(-98px); } to { transform: translateX(98px); } }
+@keyframes introTag   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .intro { display: none; } }
+
+@media (max-width: 560px) {
+  .intro-stage { transform: scale(.82); }
+  section { padding: 84px 0; }
 }

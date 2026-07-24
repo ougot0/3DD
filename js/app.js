@@ -378,7 +378,37 @@ function initForms() {
   });
 }
 
+/* ====== Intro : imprimante 3D qui imprime le logo ALYA ====== */
+function initIntro() {
+  try { if (sessionStorage.getItem('alya_intro')) return; } catch (e) {}
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { try { sessionStorage.setItem('alya_intro', '1'); } catch (e) {} return; }
+  const nozzle = `<svg viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="0" width="26" height="13" rx="2.5" fill="currentColor"/>
+    <path d="M7 13 H25 L20 27 H12 Z" fill="currentColor"/>
+    <rect x="14" y="27" width="4" height="7" rx="1" fill="currentColor"/>
+    <rect x="15" y="34" width="2" height="6" rx="1" fill="var(--accent)"/>
+  </svg>`;
+  const el = document.createElement('div');
+  el.className = 'intro';
+  el.id = 'intro';
+  el.setAttribute('role', 'img');
+  el.setAttribute('aria-label', 'ALYA — Impression 3D');
+  el.innerHTML = `
+    <div class="intro-stage">
+      <div class="intro-head"><div class="intro-nozzle">${nozzle}</div></div>
+      <div class="intro-word">${SHOP.name}</div>
+      <div class="intro-plate"></div>
+    </div>
+    <div class="intro-tag">${SHOP.tagline}</div>`;
+  document.body.appendChild(el);
+  try { sessionStorage.setItem('alya_intro', '1'); } catch (e) {}
+  const close = () => { el.classList.add('hide'); setTimeout(() => el.remove(), 600); };
+  el.addEventListener('click', close);
+  setTimeout(close, 2600);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initIntro();
   initChrome();
   updateCartCount();
   initTheme();
