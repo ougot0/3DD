@@ -29,45 +29,38 @@ const CATEGORIES = [
 const PRODUCTS = [
   // ---------------------- FIGURINES ----------------------
   {
-    name: "Buste Athéna",
-    price: 34.90, oldPrice: null,
+    name: "Mario",
+    price: 29.90, oldPrice: null,
     category: "figurines", badge: "Populaire", image: "",
-    description: "Un buste élégant à la finition mate, pièce maîtresse d'une étagère.",
+    description: "Figurine détaillée imprimée en 3D et finie à la main.",
     stripe: ""
   },
   {
-    name: "Renard Lové",
-    price: 22.90, oldPrice: null,
-    category: "figurines", badge: null, image: "",
-    description: "Petit renard aux courbes douces, parfait comme cadeau tendre.",
-    stripe: ""
-  },
-  {
-    name: "Astronaute Rêveur",
-    price: 27.90, oldPrice: null,
-    category: "figurines", badge: "Nouveau", image: "",
-    description: "Un explorateur assis sur son casque, à contempler.",
-    stripe: ""
-  },
-  {
-    name: "Chat Assis",
-    price: 18.90, oldPrice: null,
-    category: "figurines", badge: null, image: "",
-    description: "Silhouette féline épurée, disponible en plusieurs teintes.",
-    stripe: ""
-  },
-  {
-    name: "Dragon d'Étagère",
-    price: 39.90, oldPrice: 44.90,
-    category: "figurines", badge: null, image: "",
-    description: "Un dragon lové aux écailles finement détaillées.",
-    stripe: ""
-  },
-  {
-    name: "Danseuse en Mouvement",
+    name: "Luigi",
     price: 29.90, oldPrice: null,
     category: "figurines", badge: null, image: "",
-    description: "Une figure gracieuse saisie en plein élan.",
+    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    stripe: ""
+  },
+  {
+    name: "Spider-Man",
+    price: 32.90, oldPrice: null,
+    category: "figurines", badge: "Nouveau", image: "",
+    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    stripe: ""
+  },
+  {
+    name: "Deadpool",
+    price: 34.90, oldPrice: null,
+    category: "figurines", badge: "Nouveau", image: "",
+    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    stripe: ""
+  },
+  {
+    name: "Venom",
+    price: 34.90, oldPrice: null,
+    category: "figurines", badge: null, image: "",
+    description: "Figurine détaillée imprimée en 3D et finie à la main.",
     stripe: ""
   },
 

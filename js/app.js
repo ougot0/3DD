@@ -19,12 +19,13 @@ const SHOP = {
 
 /* ====== Navigation ====== */
 const NAV = [
-  { href: "index.html",      label: "Accueil" },
-  { href: "boutique.html",   label: "Boutique" },
-  { href: "sur-mesure.html", label: "Sur mesure" },
-  { href: "a-propos.html",   label: "À propos" },
-  { href: "faq.html",        label: "FAQ" },
-  { href: "contact.html",    label: "Contact" }
+  { href: "index.html",                  label: "Accueil" },
+  { href: "nouveautes.html",             label: "Nouveautés" },
+  { href: "boutique.html?cat=figurines", label: "Figurines" },
+  { href: "boutique.html?cat=accessoires", label: "Accessoires" },
+  { href: "boutique.html?cat=decorations", label: "Décorations" },
+  { href: "sur-mesure.html",             label: "Personnalisation" },
+  { href: "contact.html",                label: "Contact" }
 ];
 
 const ICON = {
@@ -49,9 +50,12 @@ function brandHTML(withTag) {
 
 function headerHTML() {
   const page = currentPage();
+  const curCat = new URLSearchParams(location.search).get('cat');
   const links = NAV.map((n) => {
-    const active = n.href === page ? ' class="active"' : '';
-    return `<a href="${n.href}"${active}>${n.label}</a>`;
+    const [hp, hq] = n.href.split('?');
+    const hcat = hq ? new URLSearchParams(hq).get('cat') : null;
+    const isActive = hp === page && (hcat ? hcat === curCat : !curCat || hp !== 'boutique.html');
+    return `<a href="${n.href}"${isActive ? ' class="active"' : ''}>${n.label}</a>`;
   }).join('');
   return `
     <div class="wrap nav">
@@ -87,7 +91,8 @@ function footerHTML() {
         <div>
           <h4>Studio</h4>
           <a href="a-propos.html">À propos</a>
-          <a href="sur-mesure.html">Sur mesure</a>
+          <a href="sur-mesure.html">Personnalisation</a>
+          <a href="nouveautes.html">Nouveautés</a>
           <a href="faq.html">FAQ</a>
         </div>
         <div>
@@ -237,6 +242,15 @@ function initFeatured() {
   wireAddButtons();
 }
 
+/* ====== Nouveautés ====== */
+function initNouveautes() {
+  const mount = document.getElementById('new-grid');
+  if (!mount) return;
+  const news = PRODUCTS.filter((p) => (p.badge || '').toLowerCase().includes('nouveau'));
+  renderProducts(news.length ? news : PRODUCTS.slice(0, 8), 'new-grid');
+  wireAddButtons();
+}
+
 /* ====== Boutique : filtres ====== */
 function initShop() {
   const mount = document.getElementById('shop-grid');
@@ -382,24 +396,37 @@ function initForms() {
 function initIntro() {
   try { if (sessionStorage.getItem('alya_intro')) return; } catch (e) {}
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { try { sessionStorage.setItem('alya_intro', '1'); } catch (e) {} return; }
-  const nozzle = `<svg viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="3" y="0" width="26" height="13" rx="2.5" fill="currentColor"/>
-    <path d="M7 13 H25 L20 27 H12 Z" fill="currentColor"/>
-    <rect x="14" y="27" width="4" height="7" rx="1" fill="currentColor"/>
-    <rect x="15" y="34" width="2" height="6" rx="1" fill="var(--accent)"/>
-  </svg>`;
+  const machine = `
+    <svg class="intro-machine" viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg">
+      <rect class="foot" x="58" y="286" width="34" height="11" rx="3"/>
+      <rect class="foot" x="368" y="286" width="34" height="11" rx="3"/>
+      <path class="frame" d="M75 288 V46 H385 V288"/>
+      <path class="frame" d="M58 288 H402"/>
+      <polygon class="bed-top" points="140,246 320,246 300,232 120,232"/>
+      <polygon class="bed-front" points="140,246 320,246 320,258 140,258"/>
+      <g class="ig">
+        <rect class="gantry-bar" x="75" y="150" width="310" height="14" rx="3"/>
+        <circle class="motor" cx="82" cy="157" r="11"/>
+        <circle class="motor" cx="378" cy="157" r="11"/>
+        <g class="carriage">
+          <line class="filament" x1="230" y1="128" x2="230" y2="144"/>
+          <rect class="carriage-box" x="212" y="142" width="36" height="30" rx="5"/>
+          <path class="nozzle" d="M220 172 h20 l-5 13 h-10 z"/>
+          <rect class="nozzle" x="228" y="185" width="4" height="7" rx="1"/>
+        </g>
+      </g>
+    </svg>`;
   const el = document.createElement('div');
   el.className = 'intro';
   el.id = 'intro';
   el.setAttribute('role', 'img');
-  el.setAttribute('aria-label', 'ALYA — Impression 3D');
+  el.setAttribute('aria-label', SHOP.name + ' — ' + SHOP.tagline);
   el.innerHTML = `
     <div class="intro-stage">
-      <div class="intro-head"><div class="intro-nozzle">${nozzle}</div></div>
-      <div class="intro-word">${SHOP.name}</div>
-      <div class="intro-plate"></div>
+      ${machine}
+      <div class="intro-print">${SHOP.name}</div>
     </div>
-    <div class="intro-tag">${SHOP.tagline}</div>`;
+    <div class="intro-tag">${SHOP.tagline} · votre logo prend forme</div>`;
   document.body.appendChild(el);
   try { sessionStorage.setItem('alya_intro', '1'); } catch (e) {}
   const close = () => { el.classList.add('hide'); setTimeout(() => el.remove(), 600); };
@@ -415,6 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initCatArt();
   initFeatured();
+  initNouveautes();
   initShop();
   renderCart();
   initForms();

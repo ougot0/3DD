@@ -543,33 +543,38 @@ section { padding: 104px 0; }
   .hero::before, .hero::after, .hero-frame { animation: none; }
 }
 
-/* ---------- Intro : imprimante 3D qui imprime le logo ---------- */
-.intro { position: fixed; inset: 0; z-index: 9999; background: var(--bg);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; }
-.intro.hide { opacity: 0; pointer-events: none; transition: opacity .55s ease; }
-.intro-stage { position: relative; width: 340px; height: 210px; color: var(--ink); }
-.intro-stage::before, .intro-stage::after { content: ""; position: absolute; top: 4px; bottom: 16px; width: 4px; border-radius: 4px; background: var(--line); }
-.intro-stage::before { left: 22px; } .intro-stage::after { right: 22px; }
-.intro-plate { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 252px; height: 8px; border-radius: 5px; background: var(--ink); opacity: .16; }
-.intro-word { position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
-  font-family: var(--display); font-weight: 800; font-size: 92px; line-height: 1; letter-spacing: -.04em;
-  background: var(--grad-btn); -webkit-background-clip: text; background-clip: text; color: transparent;
-  clip-path: inset(100% 0 0 0); animation: printLayers 1.9s steps(22) .35s forwards;
-  filter: drop-shadow(0 8px 22px var(--glow)); }
-.intro-head { position: absolute; left: 0; right: 0; top: 0; transform: translateY(152px); animation: headRise 1.9s linear .35s forwards; }
-.intro-head::before { content: ""; position: absolute; left: 16px; right: 16px; top: 8px; height: 5px; border-radius: 4px;
-  background: linear-gradient(90deg, var(--line), color-mix(in srgb, var(--accent) 30%, var(--line)), var(--line)); }
-.intro-nozzle { position: absolute; left: 50%; margin-left: -16px; top: 4px; animation: sweepX .5s ease-in-out .35s infinite alternate; }
-.intro-nozzle svg { width: 32px; height: 40px; display: block; color: var(--ink); }
-.intro-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .42em; text-transform: uppercase; color: var(--muted);
-  opacity: 0; animation: introTag .5s ease 1.95s forwards; }
-@keyframes printLayers { to { clip-path: inset(0 0 0 0); } }
-@keyframes headRise   { from { transform: translateY(152px); } to { transform: translateY(4px); } }
-@keyframes sweepX     { from { transform: translateX(-98px); } to { transform: translateX(98px); } }
-@keyframes introTag   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* ---------- Intro : vraie imprimante 3D qui imprime ALYA en relief ---------- */
+.intro { position: fixed; inset: 0; z-index: 9999;
+  background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 9%, var(--bg)), var(--bg) 68%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+.intro.hide { opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+.intro-stage { position: relative; width: 460px; height: 340px; max-width: 92vw; }
+.intro-machine { width: 100%; height: 100%; display: block; overflow: visible; }
+.intro-machine .frame { fill: none; stroke: var(--ink); stroke-width: 9; stroke-linejoin: round; stroke-linecap: round; opacity: .88; }
+.intro-machine .foot { fill: var(--ink); opacity: .88; }
+.intro-machine .bed-top { fill: var(--ink); opacity: .13; }
+.intro-machine .bed-front { fill: var(--ink); opacity: .22; }
+.intro-machine .gantry-bar { fill: var(--ink); opacity: .82; }
+.intro-machine .motor { fill: var(--accent); opacity: .85; }
+.intro-machine .carriage-box { fill: var(--ink); }
+.intro-machine .nozzle { fill: var(--ink); }
+.intro-machine .filament { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+.intro-machine .ig { animation: gantryRise 2.3s cubic-bezier(.55,0,.4,1) .3s forwards; }
+.intro-machine .carriage { animation: carriageSweep .5s ease-in-out .3s infinite alternate; }
+.intro-print { position: absolute; left: 0; right: 0; bottom: 92px; text-align: center;
+  font-family: var(--display); font-weight: 800; font-size: 82px; line-height: 1; letter-spacing: -.045em;
+  color: #6d52d4;
+  text-shadow: 1px 2px 0 #5c44bd, 2px 4px 0 #4f3aa8, 3px 6px 0 #453394, 4px 8px 0 #3b2c81, 5px 11px 16px rgba(18,18,42,.4);
+  clip-path: inset(100% 0 0 0); animation: printRise 2.3s steps(28) .3s forwards; }
+.intro-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .34em; text-transform: uppercase; color: var(--muted);
+  opacity: 0; animation: introTag .5s ease 2.35s forwards; }
+@keyframes gantryRise  { from { transform: translateY(122px); } to { transform: translateY(0); } }
+@keyframes carriageSweep { from { transform: translateX(-120px); } to { transform: translateX(120px); } }
+@keyframes printRise   { to { clip-path: inset(0 0 0 0); } }
+@keyframes introTag    { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .intro { display: none; } }
 
 @media (max-width: 560px) {
-  .intro-stage { transform: scale(.82); }
+  .intro-stage { transform: scale(.72); }
   section { padding: 84px 0; }
 }
