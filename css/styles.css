@@ -559,17 +559,20 @@ section { padding: 104px 0; }
 .intro-machine .carriage-box { fill: var(--ink); }
 .intro-machine .nozzle { fill: var(--ink); }
 .intro-machine .filament { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
-.intro-machine .ig { animation: gantryRise 2.3s cubic-bezier(.55,0,.4,1) .3s forwards; }
-.intro-machine .carriage { animation: carriageSweep .5s ease-in-out .3s infinite alternate; }
+.intro-machine .spark { fill: var(--accent); filter: drop-shadow(0 0 5px var(--accent)); }
+/* La tête (buse) et l'impression montent EXACTEMENT au même rythme, couche par
+   couche : la pointe de la buse reste sur la couche en cours d'impression. */
+.intro-machine .ig { animation: gantryRise 2.7s steps(18, start) .35s forwards; }
+.intro-machine .carriage { animation: carriageSweep .32s ease-in-out .35s infinite alternate; }
 .intro-print { position: absolute; left: 0; right: 0; bottom: 92px; text-align: center;
   font-family: var(--display); font-weight: 800; font-size: 82px; line-height: 1; letter-spacing: -.045em;
   color: #6d52d4;
   text-shadow: 1px 2px 0 #5c44bd, 2px 4px 0 #4f3aa8, 3px 6px 0 #453394, 4px 8px 0 #3b2c81, 5px 11px 16px rgba(18,18,42,.4);
-  clip-path: inset(100% 0 0 0); animation: printRise 2.3s steps(28) .3s forwards; }
+  clip-path: inset(100% 0 0 0); animation: printRise 2.7s steps(18, start) .35s forwards; }
 .intro-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .34em; text-transform: uppercase; color: var(--muted);
-  opacity: 0; animation: introTag .5s ease 2.35s forwards; }
-@keyframes gantryRise  { from { transform: translateY(122px); } to { transform: translateY(0); } }
-@keyframes carriageSweep { from { transform: translateX(-120px); } to { transform: translateX(120px); } }
+  opacity: 0; animation: introTag .5s ease 3s forwards; }
+@keyframes gantryRise  { from { transform: translateY(56px); } to { transform: translateY(-26px); } }
+@keyframes carriageSweep { from { transform: translateX(-122px); } to { transform: translateX(122px); } }
 @keyframes printRise   { to { clip-path: inset(0 0 0 0); } }
 @keyframes introTag    { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .intro { display: none; } }

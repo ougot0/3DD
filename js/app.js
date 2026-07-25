@@ -413,6 +413,7 @@ function initIntro() {
           <rect class="carriage-box" x="212" y="142" width="36" height="30" rx="5"/>
           <path class="nozzle" d="M220 172 h20 l-5 13 h-10 z"/>
           <rect class="nozzle" x="228" y="185" width="4" height="7" rx="1"/>
+          <rect class="spark" x="226" y="189" width="8" height="5" rx="1"/>
         </g>
       </g>
     </svg>`;
@@ -431,7 +432,7 @@ function initIntro() {
   try { sessionStorage.setItem('alya_intro', '1'); } catch (e) {}
   const close = () => { el.classList.add('hide'); setTimeout(() => el.remove(), 600); };
   el.addEventListener('click', close);
-  setTimeout(close, 2600);
+  setTimeout(close, 3300);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
