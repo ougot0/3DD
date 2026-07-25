@@ -28,39 +28,61 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   // ---------------------- FIGURINES ----------------------
+  // NB : les prix ci-dessous sont PROVISOIRES (à ajuster). Les hauteurs sont réelles.
   {
     name: "Mario",
-    price: 29.90, oldPrice: null,
+    price: 24.90, oldPrice: null,
     category: "figurines", badge: "Populaire", image: "",
-    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    description: "Figurine imprimée en 3D et finie à la main · Hauteur 17 cm.",
     stripe: ""
   },
   {
-    name: "Luigi",
+    name: "Mario — Peaky Blinders",
+    price: 32.90, oldPrice: null,
+    category: "figurines", badge: null, image: "",
+    description: "Version Peaky Blinders, imprimée en 3D et finie à la main · Hauteur 22 cm.",
+    stripe: ""
+  },
+  {
+    name: "Luidji",
     price: 29.90, oldPrice: null,
     category: "figurines", badge: null, image: "",
-    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    description: "Figurine imprimée en 3D et finie à la main · Hauteur 20 cm.",
     stripe: ""
   },
   {
-    name: "Spider-Man",
-    price: 32.90, oldPrice: null,
+    name: "Luidji — Peaky Blinders",
+    price: 44.90, oldPrice: null,
     category: "figurines", badge: "Nouveau", image: "",
-    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    description: "Version Peaky Blinders, grand format, imprimée en 3D · Hauteur 32 cm.",
     stripe: ""
   },
   {
-    name: "Deadpool",
+    name: "Deadpool — avec chapeau",
+    price: 39.90, oldPrice: null,
+    category: "figurines", badge: null, image: "",
+    description: "Deadpool avec son chapeau, imprimé en 3D et fini à la main · Hauteur 27 cm.",
+    stripe: ""
+  },
+  {
+    name: "Deadpool — sans chapeau",
     price: 34.90, oldPrice: null,
-    category: "figurines", badge: "Nouveau", image: "",
-    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    category: "figurines", badge: null, image: "",
+    description: "Deadpool sans chapeau, imprimé en 3D et fini à la main · Hauteur 23 cm.",
     stripe: ""
   },
   {
     name: "Venom",
-    price: 34.90, oldPrice: null,
+    price: 37.90, oldPrice: null,
     category: "figurines", badge: null, image: "",
-    description: "Figurine détaillée imprimée en 3D et finie à la main.",
+    description: "Figurine imprimée en 3D et finie à la main · Hauteur 25 cm.",
+    stripe: ""
+  },
+  {
+    name: "Bob Marley",
+    price: 32.90, oldPrice: null,
+    category: "figurines", badge: "Nouveau", image: "",
+    description: "Figurine imprimée en 3D et finie à la main · Hauteur 22 cm.",
     stripe: ""
   },
 
