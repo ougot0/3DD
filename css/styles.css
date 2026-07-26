@@ -633,3 +633,30 @@ body { background: var(--page-bg); background-attachment: fixed; }
 .guarantee .g-ico, .contact-card .ci, .hero-tag .dot {
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--surface)), color-mix(in srgb, #28b6d8 20%, var(--surface)));
 }
+
+/* =========================================================
+   NIVEAU DE COULEUR "MIDDLE" (plus vif, clair ET sombre)
+   ========================================================= */
+/* Hero plus coloré */
+:root {
+  --hero-wash:
+    radial-gradient(1100px 560px at 82% -10%, rgba(124,92,240,.26), transparent 60%),
+    radial-gradient(900px 560px at -8% 16%, rgba(40,182,216,.20), transparent 55%),
+    radial-gradient(720px 480px at 50% 118%, rgba(255,110,170,.15), transparent 60%);
+}
+
+/* Badges produits colorés (remplis) */
+.badge { background: var(--ink); color: #fff; border: none; backdrop-filter: none; }
+.badge.nouveau   { background: linear-gradient(135deg, #7c5cf0, #28b6d8); color: #fff; }
+.badge.populaire { background: linear-gradient(135deg, #ff7aa8, #ff9d5c); color: #fff; }
+
+/* En-têtes de page teintés */
+.page-head { background: var(--band-wash); }
+
+/* Cartes catégorie : liseré coloré en haut */
+.cat-grid .cat-card:nth-child(3n+1) { border-top: 3px solid #7c5cf0; }
+.cat-grid .cat-card:nth-child(3n+2) { border-top: 3px solid #22c3d6; }
+.cat-grid .cat-card:nth-child(3n+3) { border-top: 3px solid #ff7aa8; }
+
+/* Étiquette catégorie des produits en couleur d'accent */
+.card-cat { color: #7c5cf0; }

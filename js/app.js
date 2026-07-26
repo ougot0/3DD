@@ -159,32 +159,39 @@ function toast(msg) {
 
 /* ====== Visuels d'attente par catégorie (façon photo studio) ====== */
 function placeholder(cat) {
+  // Une couleur vive par catégorie (visuels d'attente colorés)
+  const P = {
+    figurines:   { bg1: '#efe9fe', bg2: '#e0d5fb', c1: '#8b6cf5', c2: '#6d4fd8', c3: '#5133b8', sh: 'rgba(70,45,140,.16)' },
+    accessoires: { bg1: '#e2f6f9', bg2: '#cdeef3', c1: '#26c6da', c2: '#12a3ba', c3: '#0b7d8f', sh: 'rgba(10,90,110,.16)' },
+    decorations: { bg1: '#fde9f1', bg2: '#fbd7e5', c1: '#ff7fae', c2: '#f2578c', c3: '#d1396f', sh: 'rgba(150,40,90,.16)' }
+  };
+  const k = P[cat] || P.figurines;
   const scenes = {
     figurines: `
-      <ellipse cx="200" cy="322" rx="112" ry="20" fill="var(--ph-shadow)"/>
-      <rect x="150" y="300" width="100" height="26" rx="8" fill="var(--ph-form3)"/>
-      <path d="M136 300 q0 -78 64 -78 q64 0 64 78 Z" fill="var(--ph-form2)"/>
-      <path d="M200 222 q64 0 64 78 H200 Z" fill="var(--ph-form1)"/>
-      <circle cx="200" cy="176" r="46" fill="var(--ph-form2)"/>
-      <path d="M200 130 a46 46 0 0 1 0 92 Z" fill="var(--ph-form1)"/>`,
+      <ellipse cx="200" cy="322" rx="112" ry="20" fill="${k.sh}"/>
+      <rect x="150" y="300" width="100" height="26" rx="8" fill="${k.c3}"/>
+      <path d="M136 300 q0 -78 64 -78 q64 0 64 78 Z" fill="${k.c2}"/>
+      <path d="M200 222 q64 0 64 78 H200 Z" fill="${k.c1}"/>
+      <circle cx="200" cy="176" r="46" fill="${k.c2}"/>
+      <path d="M200 130 a46 46 0 0 1 0 92 Z" fill="${k.c1}"/>`,
     accessoires: `
-      <ellipse cx="200" cy="300" rx="118" ry="22" fill="var(--ph-shadow)"/>
-      <path d="M108 176 q92 -46 184 0 v18 q0 96 -92 96 q-92 0 -92 -96 Z" fill="var(--ph-form2)"/>
-      <path d="M200 158 q46 4 92 18 v18 q0 96 -92 96 Z" fill="var(--ph-form1)"/>
-      <ellipse cx="200" cy="176" rx="92" ry="26" fill="var(--ph-form3)"/>
-      <ellipse cx="200" cy="172" rx="74" ry="19" fill="var(--ph-bg2)"/>`,
+      <ellipse cx="200" cy="300" rx="118" ry="22" fill="${k.sh}"/>
+      <path d="M108 176 q92 -46 184 0 v18 q0 96 -92 96 q-92 0 -92 -96 Z" fill="${k.c2}"/>
+      <path d="M200 158 q46 4 92 18 v18 q0 96 -92 96 Z" fill="${k.c1}"/>
+      <ellipse cx="200" cy="176" rx="92" ry="26" fill="${k.c3}"/>
+      <ellipse cx="200" cy="172" rx="74" ry="19" fill="${k.bg2}"/>`,
     decorations: `
-      <circle cx="200" cy="196" r="128" fill="var(--ph-form3)"/>
-      <circle cx="200" cy="196" r="116" fill="var(--ph-form2)"/>
-      <g fill="none" stroke="var(--ph-form1)" stroke-width="12" stroke-linecap="round">
+      <circle cx="200" cy="196" r="128" fill="${k.c3}"/>
+      <circle cx="200" cy="196" r="116" fill="${k.c2}"/>
+      <g fill="none" stroke="${k.c1}" stroke-width="12" stroke-linecap="round">
         <path d="M120 172 q40 -34 80 0 q40 34 80 0"/>
         <path d="M120 210 q40 -34 80 0 q40 34 80 0"/>
         <path d="M120 248 q40 -34 80 0 q40 34 80 0"/>
       </g>`
   };
   return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aperçu produit">
-    <rect width="400" height="400" fill="var(--ph-bg1)"/>
-    <rect y="250" width="400" height="150" fill="var(--ph-bg2)"/>
+    <rect width="400" height="400" fill="${k.bg1}"/>
+    <rect y="250" width="400" height="150" fill="${k.bg2}"/>
     ${scenes[cat] || scenes.figurines}
   </svg>`;
 }
