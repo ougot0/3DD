@@ -14,7 +14,15 @@ const SHOP = {
   phone:   "+33 6 00 00 00 00",       // ← à remplacer par ton vrai numéro
   address: "Adresse à compléter",     // ← optionnel
   instagram: "",                       // ← lien Instagram (optionnel)
-  tiktok:    ""                        // ← lien TikTok (optionnel)
+  tiktok:    "",                       // ← lien TikTok (optionnel)
+
+  // ===== ENVOI DES DEVIS / MESSAGES PAR EMAIL =====
+  // Colle ici ta clé gratuite Web3Forms pour recevoir les devis (et les photos)
+  // directement sur ton email, dès que le client valide le formulaire.
+  //   1. Va sur https://web3forms.com  →  entre alyabrande@gmail.com
+  //   2. Tu reçois une "Access Key" par mail  →  copie-la ci-dessous
+  // Tant que c'est vide, le formulaire ouvre la messagerie du client (secours).
+  formKey: ""
 };
 
 /* ====== Navigation ====== */
@@ -377,16 +385,42 @@ function initReveal() {
 /* ====== Formulaire devis / contact ====== */
 function initForms() {
   document.querySelectorAll('form[data-mailto]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       if (!form.checkValidity()) return; // le navigateur affiche les erreurs
       e.preventDefault();
+      const subject = form.dataset.subject || 'Nouveau message — ALYA';
+      const btn = form.querySelector('button[type="submit"]');
+
+      // ---- Envoi automatique par email (via Web3Forms) si une clé est configurée ----
+      if (SHOP.formKey && SHOP.formKey.trim() !== '') {
+        const data = new FormData(form);
+        data.append('access_key', SHOP.formKey);
+        data.append('subject', subject);
+        data.append('from_name', 'Site ALYA');
+        const original = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+          const out = await res.json();
+          if (!out.success) throw new Error(out.message || 'Erreur');
+          form.innerHTML = `<div class="form-success">
+            <div class="fs-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Merci, c'est envoyé !</h3>
+            <p>Votre demande nous est bien parvenue. On vous répond très vite par email.</p>
+          </div>`;
+        } catch (err) {
+          if (btn) { btn.disabled = false; btn.textContent = original; }
+          toast("Envoi impossible pour le moment. Réessayez ou écrivez-nous par email.");
+        }
+        return;
+      }
+
+      // ---- Secours : ouverture de la messagerie du client (si aucune clé) ----
       const data = new FormData(form);
       let body = '';
       for (const [k, v] of data.entries()) { if (k !== 'photo') body += `${k} : ${v}\n`; }
-      const hasPhoto = form.querySelector('input[type="file"]')?.files?.length;
-      if (hasPhoto) body += `\n(Pensez à joindre votre photo à cet email.)`;
-      const subject = encodeURIComponent(form.dataset.subject || 'Nouveau message — ALYA');
-      window.location.href = `mailto:${SHOP.email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+      if (form.querySelector('input[type="file"]')?.files?.length) body += `\n(Pensez à joindre votre photo à cet email.)`;
+      window.location.href = `mailto:${SHOP.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       toast('Votre messagerie va s\'ouvrir…');
     });
   });

@@ -581,3 +581,10 @@ section { padding: 104px 0; }
   .intro-stage { transform: scale(.72); }
   section { padding: 84px 0; }
 }
+
+/* Message de confirmation après envoi d'un formulaire */
+.form-success { text-align: center; padding: 26px 10px; display: grid; gap: 12px; justify-items: center; }
+.form-success .fs-ico { width: 58px; height: 58px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.form-success .fs-ico svg { width: 30px; height: 30px; }
+.form-success h3 { font-size: 1.4rem; }
+.form-success p { color: var(--muted); max-width: 38ch; }

@@ -71,6 +71,17 @@ const SHOP = {
 
 Ces infos alimentent le pied de page, la page Contact et les formulaires.
 
+### 📩 Recevoir les devis & messages par email (2 min)
+
+Pour recevoir automatiquement chaque demande (avec la photo) sur ton email :
+
+1. Va sur **https://web3forms.com** et entre ton email (`alyabrande@gmail.com`).
+2. Tu reçois une **« Access Key »** par mail — copie-la.
+3. Colle-la dans `js/app.js`, ligne `formKey: ""` → `formKey: "ta-cle-ici"`.
+
+C'est tout ! Dès qu'un client valide un devis ou un message, tu le reçois par email.
+Tant que `formKey` est vide, le formulaire ouvre la messagerie du client (secours).
+
 ---
 
 ## 🛒 Le panier & le paiement
