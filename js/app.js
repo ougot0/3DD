@@ -476,6 +476,47 @@ function initIntro() {
   setTimeout(close, 3300);
 }
 
+/* ====== Cube 3D interactif dans le hero (adapté aux objets 3D) ====== */
+function initHero3D() {
+  document.querySelectorAll('.hero-frame').forEach((frame) => {
+    frame.classList.add('cube-host');
+    frame.innerHTML =
+      '<div class="cube-scene"><div class="cube">' +
+      '<div class="face front">ALYA</div>' +
+      '<div class="face back">3D</div>' +
+      '<div class="face right">🖨️</div>' +
+      '<div class="face left">✦</div>' +
+      '<div class="face top">🧊</div>' +
+      '<div class="face bottom">❤</div>' +
+      '</div></div>';
+    const scene = frame.querySelector('.cube-scene');
+    frame.addEventListener('pointermove', (e) => {
+      const r = frame.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      scene.style.transform = `rotateX(${-y * 16}deg) rotateY(${x * 22}deg)`;
+    });
+    frame.addEventListener('pointerleave', () => { scene.style.transform = ''; });
+  });
+}
+
+/* ====== Inclinaison 3D des cartes au survol ====== */
+function initTilt() {
+  if (!matchMedia('(pointer: fine)').matches) return;
+  let cur = null;
+  document.addEventListener('pointermove', (e) => {
+    const el = e.target.closest('.card, .cat-card');
+    if (el) {
+      if (cur && cur !== el) cur.style.transform = '';
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = `perspective(760px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg) translateY(-8px)`;
+      cur = el;
+    } else if (cur) { cur.style.transform = ''; cur = null; }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initIntro();
   initChrome();
@@ -483,12 +524,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
   initCatArt();
+  initHero3D();
   initFeatured();
   initNouveautes();
   initShop();
   renderCart();
   initForms();
   initReveal();
+  initTilt();
   // remplit les coordonnées affichées dans les pages (contact, etc.)
   document.querySelectorAll('[data-shop]').forEach((el) => {
     const key = el.getAttribute('data-shop');

@@ -749,3 +749,30 @@ body { background: var(--page-bg); background-attachment: fixed; }
   .cta-band, .trust-strip, .hero h1 em, .head h2,
   .hero-frame, .marquee, .marquee-track { animation: none !important; }
 }
+
+/* =========================================================
+   GROSSE FOLIE — vrai 3D interactif (adapté aux objets 3D)
+   ========================================================= */
+/* Cube 3D dans le hero */
+.hero-frame.cube-host { perspective: 1000px; background: radial-gradient(circle at 50% 35%, #201538, #0c0820 75%); border: 1px solid rgba(255,255,255,.08); }
+.cube-scene { width: 100%; height: 100%; display: grid; place-items: center; transform-style: preserve-3d; transition: transform .18s ease; }
+.cube { width: 168px; height: 168px; position: relative; transform-style: preserve-3d; animation: spin3d 16s linear infinite; }
+.cube:hover { animation-duration: 6s; }
+.cube .face { position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--display); font-weight: 800; font-size: 2rem; color: #fff; letter-spacing: -.02em;
+  border-radius: 16px; border: 2px solid rgba(255,255,255,.4);
+  box-shadow: inset 0 0 55px rgba(255,255,255,.18), 0 0 34px rgba(124,92,240,.35); }
+.cube .front  { transform: translateZ(84px); background: linear-gradient(135deg,#7c5cf0,#28b6d8); }
+.cube .back   { transform: rotateY(180deg) translateZ(84px); background: linear-gradient(135deg,#ff7aa8,#ffb057); }
+.cube .right  { transform: rotateY(90deg) translateZ(84px); background: linear-gradient(135deg,#22c3d6,#3ddc97); font-size: 2.6rem; }
+.cube .left   { transform: rotateY(-90deg) translateZ(84px); background: linear-gradient(135deg,#a15cf0,#ff7aa8); font-size: 2.6rem; }
+.cube .top    { transform: rotateX(90deg) translateZ(84px); background: linear-gradient(135deg,#ffb057,#ff7aa8); font-size: 2.6rem; }
+.cube .bottom { transform: rotateX(-90deg) translateZ(84px); background: linear-gradient(135deg,#5b6bff,#7c5cf0); font-size: 2.6rem; }
+@keyframes spin3d { from { transform: rotateX(-22deg) rotateY(0); } to { transform: rotateX(-22deg) rotateY(360deg); } }
+
+/* Cartes qui s'inclinent en 3D au survol */
+.product-grid, .cat-grid { perspective: 1000px; }
+.card, .cat-card { transform-style: preserve-3d; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) { .cube { animation: none; } }
+@media (max-width: 620px) { .cube { width: 132px; height: 132px; } .cube .face { font-size: 1.6rem; } .cube .front,.cube .back,.cube .right,.cube .left,.cube .top,.cube .bottom { } }
