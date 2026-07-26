@@ -20,7 +20,7 @@ const SHOP = {
   // 1. Va sur https://web3forms.com  →  entre alyabrande@gmail.com  →  la CLÉ
   //    (Access Key) s'affiche à l'écran.  2. Colle-la ci-dessous entre les "".
   // Dès que la clé est là, chaque devis (avec la photo) arrive direct sur ton email.
-  formKey: ""
+  formKey: "d8baa19a-03be-491f-9777-c2aa233cf1ba"
 };
 
 /* ====== Navigation ====== */
