@@ -380,7 +380,7 @@ function initReveal() {
 function initForms() {
   document.querySelectorAll('form[data-mailto]').forEach((form) => {
     if (!SHOP.email) return;
-    // Envoi direct par email via FormSubmit (aucun compte / aucune clé nécessaire)
+    // Envoi automatique par email via FormSubmit (aucun compte / aucune clé)
     form.action = 'https://formsubmit.co/' + SHOP.email;
     form.method = 'POST';
     form.enctype = 'multipart/form-data';
@@ -396,7 +396,6 @@ function initForms() {
     addHidden('_captcha', 'false');
     try { addHidden('_next', new URL('merci.html', location.href).href); } catch (e) {}
 
-    // Anti-spam invisible (rempli seulement par les robots)
     if (!form.querySelector('[name="_honey"]')) {
       const h = document.createElement('input');
       h.type = 'text'; h.name = '_honey'; h.tabIndex = -1; h.autocomplete = 'off';
@@ -404,7 +403,6 @@ function initForms() {
       form.appendChild(h);
     }
 
-    // Petit retour visuel au clic (la soumission native prend le relais)
     form.addEventListener('submit', () => {
       if (!form.checkValidity()) return;
       const btn = form.querySelector('button[type="submit"]');
