@@ -1,0 +1,39 @@
+name: Déploiement du site (GitHub Pages)
+
+on:
+  push:
+    branches: ["claude/3d-figurines-ecommerce-aqpw62"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Configurer / activer Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Préparer le site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Déployer
+        id: deployment
+        uses: actions/deploy-pages@v4
