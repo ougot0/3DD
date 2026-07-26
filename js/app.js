@@ -14,10 +14,14 @@ const SHOP = {
   phone:   "+33 6 00 00 00 00",       // ← à remplacer par ton vrai numéro
   address: "Adresse à compléter",     // ← optionnel
   instagram: "",                       // ← lien Instagram (optionnel)
-  tiktok:    ""                        // ← lien TikTok (optionnel)
+  tiktok:    "",                       // ← lien TikTok (optionnel)
+
+  // ===== RÉCEPTION DES DEVIS PAR EMAIL (automatique, sans activation) =====
+  // 1. Va sur https://web3forms.com  →  entre alyabrande@gmail.com  →  la CLÉ
+  //    (Access Key) s'affiche à l'écran.  2. Colle-la ci-dessous entre les "".
+  // Dès que la clé est là, chaque devis (avec la photo) arrive direct sur ton email.
+  formKey: ""
 };
-// Les devis et messages sont envoyés à SHOP.email via FormSubmit (aucun compte,
-// aucune clé). À la 1re demande, un email de confirmation à cliquer une seule fois.
 
 /* ====== Navigation ====== */
 const NAV = [
@@ -378,31 +382,61 @@ function initReveal() {
 
 /* ====== Formulaire devis / contact ====== */
 function initForms() {
+  const successHTML = `<div class="form-success">
+    <div class="fs-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h3>Merci, c'est envoyé !</h3>
+    <p>Votre demande nous est bien parvenue. On vous répond très vite par email.</p>
+  </div>`;
+
   document.querySelectorAll('form[data-mailto]').forEach((form) => {
+    const subject = form.dataset.subject || 'Nouveau message — ALYA';
+
+    // ---- Web3Forms : automatique, SANS activation (dès qu'une clé est fournie) ----
+    if (SHOP.formKey && SHOP.formKey.trim() !== '') {
+      form.addEventListener('submit', async (e) => {
+        if (!form.checkValidity()) return;
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const label = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+        const data = new FormData(form);
+        data.append('access_key', SHOP.formKey);
+        data.append('subject', subject);
+        data.append('from_name', 'Site ALYA');
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+          const out = await res.json();
+          if (!out.success) throw new Error(out.message || 'err');
+          form.innerHTML = successHTML;
+        } catch (err) {
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+          toast("Envoi impossible pour le moment. Réessayez ou écrivez-nous par email.");
+        }
+      });
+      return;
+    }
+
+    // ---- Par défaut : FormSubmit (automatique, confirmation une fois) ----
     if (!SHOP.email) return;
-    // Envoi automatique par email via FormSubmit (aucun compte / aucune clé)
     form.action = 'https://formsubmit.co/' + SHOP.email;
     form.method = 'POST';
     form.enctype = 'multipart/form-data';
-
     const addHidden = (name, value) => {
       if (form.querySelector('[name="' + name + '"]')) return;
       const i = document.createElement('input');
       i.type = 'hidden'; i.name = name; i.value = value;
       form.appendChild(i);
     };
-    addHidden('_subject', form.dataset.subject || 'Nouveau message — ALYA');
+    addHidden('_subject', subject);
     addHidden('_template', 'table');
     addHidden('_captcha', 'false');
     try { addHidden('_next', new URL('merci.html', location.href).href); } catch (e) {}
-
     if (!form.querySelector('[name="_honey"]')) {
       const h = document.createElement('input');
       h.type = 'text'; h.name = '_honey'; h.tabIndex = -1; h.autocomplete = 'off';
       h.style.cssText = 'position:absolute;left:-9999px;opacity:0;height:0;width:0;';
       form.appendChild(h);
     }
-
     form.addEventListener('submit', () => {
       if (!form.checkValidity()) return;
       const btn = form.querySelector('button[type="submit"]');
