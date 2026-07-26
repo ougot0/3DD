@@ -181,8 +181,8 @@ function placeholder(cat) {
   // Une couleur vive par catégorie (visuels d'attente colorés)
   const P = {
     figurines:   { bg1: '#efe9fe', bg2: '#e0d5fb', c1: '#8b6cf5', c2: '#6d4fd8', c3: '#5133b8', sh: 'rgba(70,45,140,.16)' },
-    accessoires: { bg1: '#e2f6f9', bg2: '#cdeef3', c1: '#26c6da', c2: '#12a3ba', c3: '#0b7d8f', sh: 'rgba(10,90,110,.16)' },
-    decorations: { bg1: '#fde9f1', bg2: '#fbd7e5', c1: '#ff7fae', c2: '#f2578c', c3: '#d1396f', sh: 'rgba(150,40,90,.16)' }
+    accessoires: { bg1: '#e7ecfe', bg2: '#d6def9', c1: '#6d84f2', c2: '#4f63e0', c3: '#3540b8', sh: 'rgba(40,55,150,.16)' },
+    decorations: { bg1: '#e6f1fd', bg2: '#d3e6fb', c1: '#4f8ff0', c2: '#2f6fe0', c3: '#1f4fb8', sh: 'rgba(20,70,150,.16)' }
   };
   const k = P[cat] || P.figurines;
   const scenes = {
