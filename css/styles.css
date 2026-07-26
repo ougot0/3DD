@@ -660,3 +660,53 @@ body { background: var(--page-bg); background-attachment: fixed; }
 
 /* Étiquette catégorie des produits en couleur d'accent */
 .card-cat { color: #7c5cf0; }
+
+/* =========================================================
+   COULEUR PARTOUT — mode clair coloré (sombre reste sobre)
+   ========================================================= */
+:root {
+  --band-violet: linear-gradient(180deg, #f3ecff 0%, #ebe0ff 100%);
+  --band-cyan:   linear-gradient(180deg, #e6f7fb 0%, #d8f0f6 100%);
+  --band-pink:   linear-gradient(180deg, #ffedf4 0%, #ffe0ec 100%);
+  --band-amber:  linear-gradient(180deg, #fff3e3 0%, #ffe8cd 100%);
+  --band-trust:  linear-gradient(90deg, #efe6ff 0%, #e2f5fb 50%, #ffe7f1 100%);
+  --cc1: linear-gradient(180deg, #f2eb ff, #ffffff);
+  --cc1: linear-gradient(180deg, #f2ebff, #ffffff);
+  --cc2: linear-gradient(180deg, #e7f8fc, #ffffff);
+  --cc3: linear-gradient(180deg, #ffedf6, #ffffff);
+}
+:root[data-theme="dark"], html[data-theme="dark"] {
+  --band-violet: var(--bg); --band-cyan: var(--bg); --band-pink: var(--bg); --band-amber: var(--bg);
+  --band-trust: var(--surface); --cc1: var(--surface); --cc2: var(--surface); --cc3: var(--surface);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --band-violet: var(--bg); --band-cyan: var(--bg); --band-pink: var(--bg); --band-amber: var(--bg);
+  --band-trust: var(--surface); --cc1: var(--surface); --cc2: var(--surface); --cc3: var(--surface);
+}}
+
+/* Bandes de sections colorées (accueil) */
+#categories { background: var(--band-violet); }
+#selection  { background: var(--band-cyan);  padding-top: 64px !important; }
+#garanties  { background: var(--band-pink);  padding-top: 64px !important; }
+#faq        { background: var(--band-amber); padding-top: 64px !important; }
+.trust-strip { background: var(--band-trust); }
+
+/* Cartes catégories teintées */
+.cat-grid .cat-card:nth-child(3n+1) { background: var(--cc1); }
+.cat-grid .cat-card:nth-child(3n+2) { background: var(--cc2); }
+.cat-grid .cat-card:nth-child(3n+3) { background: var(--cc3); }
+
+/* Titres de section en dégradé */
+.head h2 { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Bannière CTA : dégradé vif plein */
+.cta-band { background: linear-gradient(120deg, #7c5cf0 0%, #c247c9 50%, #ff7aa8 100%); color: #fff; border: none; box-shadow: var(--shadow-lg); }
+.cta-band h2 { color: #fff; }
+.cta-band p { color: rgba(255,255,255,.92); }
+.cta-band .btn-primary { background: #fff; color: #7c3aed; }
+.cta-band .btn-ghost { border-color: rgba(255,255,255,.7); color: #fff; }
+.cta-band .btn-ghost:hover { background: rgba(255,255,255,.14); border-color: #fff; }
+
+/* En-tête de page (boutique, contact…) plus coloré */
+.page-head { background: linear-gradient(120deg, #efe7ff, #e4f5fb 55%, #ffe8f2); border-bottom: 1px solid var(--line-soft); }
+:root[data-theme="dark"] .page-head, html[data-theme="dark"] .page-head { background: var(--surface); }
