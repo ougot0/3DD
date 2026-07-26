@@ -30,6 +30,13 @@ const PRODUCTS = [
   // ---------------------- FIGURINES ----------------------
   // NB : les prix ci-dessous sont PROVISOIRES (à ajuster). Les hauteurs sont réelles.
   {
+    name: "Pack Mario & Luigi",
+    price: 49.90, oldPrice: null,
+    category: "figurines", badge: "Nouveau", image: "assets/img/pack-mario-luigi.jpg",
+    description: "Le duo mythique imprimé en 3D et fini à la main — Mario et Luigi vendus ensemble.",
+    stripe: ""
+  },
+  {
     name: "Mario",
     price: 24.90, oldPrice: null,
     category: "figurines", badge: "Populaire", image: "",
