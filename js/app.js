@@ -112,6 +112,14 @@ function footerHTML() {
 }
 
 function initChrome() {
+  // Fond "aurore" animé derrière tout le site
+  if (!document.querySelector('.aurora')) {
+    const a = document.createElement('div');
+    a.className = 'aurora';
+    a.setAttribute('aria-hidden', 'true');
+    a.innerHTML = '<b></b><b></b><b></b><b></b><b></b>';
+    document.body.prepend(a);
+  }
   const h = document.getElementById('site-header');
   const f = document.getElementById('site-footer');
   if (h) { h.className = 'site-header'; h.innerHTML = headerHTML(); }
