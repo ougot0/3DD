@@ -588,3 +588,48 @@ section { padding: 104px 0; }
 .form-success .fs-ico svg { width: 30px; height: 30px; }
 .form-success h3 { font-size: 1.4rem; }
 .form-success p { color: var(--muted); max-width: 38ch; }
+
+/* =========================================================
+   PLUS DE PEPS EN THÈME CLAIR (le thème sombre reste inchangé)
+   ========================================================= */
+:root {
+  --page-bg: linear-gradient(175deg, #f1f0fb 0%, #edf1fa 42%, #fbeef4 100%);
+  --hero-wash:
+    radial-gradient(1000px 520px at 80% -8%, rgba(124,92,240,.18), transparent 60%),
+    radial-gradient(820px 520px at -5% 18%, rgba(40,182,216,.14), transparent 55%);
+  --band-wash: linear-gradient(120deg, #ece6fe 0%, #e7f3fb 55%, #fde9f2 100%);
+  /* placeholders produits teintés (moins gris, plus vivants) */
+  --ph-bg1:   #eceefb;
+  --ph-bg2:   #e2e5f6;
+  --ph-form1: #d0cff0;
+  --ph-form2: #b4b4e6;
+  --ph-form3: #8f8fd0;
+  --ph-shadow: rgba(80,70,160,.12);
+}
+:root[data-theme="dark"], html[data-theme="dark"] {
+  --page-bg: var(--bg); --hero-wash: none; --band-wash: var(--surface);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --page-bg: var(--bg); --hero-wash: none; --band-wash: var(--surface); }
+}
+
+body { background: var(--page-bg); background-attachment: fixed; }
+.hero { background: var(--hero-wash); }
+.hero::before, .hero::after { opacity: .95; }
+
+/* Bandeau de confiance légèrement teinté */
+.trust-strip { background: color-mix(in srgb, var(--surface) 88%, var(--accent-soft)); }
+
+/* Bannière CTA colorée (pop) */
+.cta-band {
+  background: var(--band-wash);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 52px 32px;
+}
+:root[data-theme="dark"] .cta-band, html[data-theme="dark"] .cta-band { border-color: var(--line); }
+
+/* Icônes de catégorie / garanties en dégradé (plus vivant) */
+.guarantee .g-ico, .contact-card .ci, .hero-tag .dot {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--surface)), color-mix(in srgb, #28b6d8 20%, var(--surface)));
+}
