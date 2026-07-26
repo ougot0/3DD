@@ -381,6 +381,22 @@ function initReveal() {
 }
 
 /* ====== Formulaire devis / contact ====== */
+/* Réduit une image (photo de téléphone) avant l'envoi, pour rester léger */
+async function shrinkImage(file, max = 1400, quality = 0.82) {
+  try {
+    if (!file || !file.type || !file.type.startsWith('image/')) return file;
+    const img = await createImageBitmap(file);
+    let w = img.width, h = img.height;
+    if (Math.max(w, h) > max) { const s = max / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    c.getContext('2d').drawImage(img, 0, 0, w, h);
+    const blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', quality));
+    if (!blob) return file;
+    const name = (file.name || 'photo').replace(/\.[^.]+$/, '') + '.jpg';
+    return new File([blob], name, { type: 'image/jpeg' });
+  } catch (e) { return file; }
+}
+
 function initForms() {
   const successHTML = `<div class="form-success">
     <div class="fs-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -399,48 +415,43 @@ function initForms() {
         const btn = form.querySelector('button[type="submit"]');
         const label = btn ? btn.textContent : '';
         if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
-        const data = new FormData(form);
-        data.append('access_key', SHOP.formKey);
-        data.append('subject', subject);
-        data.append('from_name', 'Site ALYA');
         try {
+          const data = new FormData(form);
+          // Réduit la photo pour rester sous la limite (Web3Forms accepte jusqu'à ~2 Mo)
+          const fileInput = form.querySelector('input[type="file"]');
+          if (fileInput && fileInput.files && fileInput.files[0]) {
+            const small = await shrinkImage(fileInput.files[0]);
+            data.set(fileInput.name || 'photo', small, small.name);
+          }
+          data.append('access_key', SHOP.formKey);
+          data.append('subject', subject);
+          data.append('from_name', 'Site ALYA');
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-          const out = await res.json();
-          if (!out.success) throw new Error(out.message || 'err');
+          const out = await res.json().catch(() => ({}));
+          if (!out.success) throw new Error(out.message || 'Réponse invalide');
           form.innerHTML = successHTML;
         } catch (err) {
           if (btn) { btn.disabled = false; btn.textContent = label; }
-          toast("Envoi impossible pour le moment. Réessayez ou écrivez-nous par email.");
+          toast('Envoi impossible : ' + (err && err.message ? err.message : 'réessayez'));
         }
       });
       return;
     }
 
-    // ---- Par défaut : FormSubmit (automatique, confirmation une fois) ----
-    if (!SHOP.email) return;
-    form.action = 'https://formsubmit.co/' + SHOP.email;
-    form.method = 'POST';
-    form.enctype = 'multipart/form-data';
-    const addHidden = (name, value) => {
-      if (form.querySelector('[name="' + name + '"]')) return;
-      const i = document.createElement('input');
-      i.type = 'hidden'; i.name = name; i.value = value;
-      form.appendChild(i);
-    };
-    addHidden('_subject', subject);
-    addHidden('_template', 'table');
-    addHidden('_captcha', 'false');
-    try { addHidden('_next', new URL('merci.html', location.href).href); } catch (e) {}
-    if (!form.querySelector('[name="_honey"]')) {
-      const h = document.createElement('input');
-      h.type = 'text'; h.name = '_honey'; h.tabIndex = -1; h.autocomplete = 'off';
-      h.style.cssText = 'position:absolute;left:-9999px;opacity:0;height:0;width:0;';
-      form.appendChild(h);
-    }
-    form.addEventListener('submit', () => {
+    // ---- Repli (si aucune clé Web3Forms) : ouverture de la messagerie ----
+    form.addEventListener('submit', (e) => {
       if (!form.checkValidity()) return;
-      const btn = form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+      e.preventDefault();
+      const data = new FormData(form);
+      let body = '';
+      for (const [k, v] of data.entries()) {
+        if (k === 'photo' || !String(v).trim()) continue;
+        body += `${k} : ${v}\n`;
+      }
+      if (form.querySelector('input[type="file"]')?.files?.length) {
+        body += `\n>> Pensez à joindre votre photo à cet email.`;
+      }
+      window.location.href = `mailto:${SHOP.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   });
 }
