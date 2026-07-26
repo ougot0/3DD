@@ -61,7 +61,7 @@ Chaque produit :
 const SHOP = {
   name:    "ALYA",
   tagline: "Impression 3D",
-  email:   "contact@alya.fr",     // ← ton vrai email
+  email:   "alyabrande@gmail.com",     // ← ton vrai email
   phone:   "+33 6 00 00 00 00",    // ← ton vrai téléphone
   address: "Adresse à compléter",  // ← optionnel
   instagram: "",                    // ← lien Instagram (optionnel)
