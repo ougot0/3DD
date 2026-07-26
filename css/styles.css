@@ -710,3 +710,42 @@ body { background: var(--page-bg); background-attachment: fixed; }
 /* En-tête de page (boutique, contact…) plus coloré */
 .page-head { background: linear-gradient(120deg, #efe7ff, #e4f5fb 55%, #ffe8f2); border-bottom: 1px solid var(--line-soft); }
 :root[data-theme="dark"] .page-head, html[data-theme="dark"] .page-head { background: var(--surface); }
+
+/* =========================================================
+   POINTE DE FOLIE — mouvement, animations, tech
+   ========================================================= */
+@keyframes gradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+@keyframes scrollX { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* Dégradés vivants (qui bougent doucement) */
+.cta-band     { background-size: 240% 240%; animation: gradShift 9s ease infinite; }
+.trust-strip  { background-size: 240% 240%; animation: gradShift 16s ease infinite; }
+.hero h1 em, .head h2 { background-size: 260% auto; animation: gradShift 7s ease infinite; }
+
+/* Hero animé */
+.hero-frame { animation: floatY 6s ease-in-out infinite; }
+
+/* Cartes réactives au survol */
+.card { transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .2s ease; }
+.card:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--shadow-lg), 0 12px 34px var(--glow); }
+.cat-card { transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease; }
+.cat-card:hover { transform: translateY(-8px) scale(1.012); }
+.btn:active { transform: translateY(0) scale(.96); }
+.icon-btn:hover { transform: translateY(-2px) rotate(-6deg); }
+
+/* Ruban défilant (style tech) */
+.marquee { position: relative; overflow: hidden; color: #fff;
+  background: linear-gradient(90deg, #7c5cf0, #c247c9, #ff7aa8, #28b6d8, #7c5cf0);
+  background-size: 240% auto; animation: gradShift 12s linear infinite;
+  border-bottom: 1px solid rgba(255,255,255,.18); }
+.marquee-track { display: inline-flex; white-space: nowrap; will-change: transform; animation: scrollX 26s linear infinite; }
+.marquee-track > span { display: inline-flex; align-items: center; padding: 9px 0;
+  font-family: var(--mono); font-weight: 600; font-size: .72rem; letter-spacing: .26em; text-transform: uppercase; }
+.marquee-track b { margin: 0 1.3rem; opacity: .65; font-weight: 400; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-band, .trust-strip, .hero h1 em, .head h2,
+  .hero-frame, .marquee, .marquee-track { animation: none !important; }
+}

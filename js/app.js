@@ -118,6 +118,17 @@ function initChrome() {
   if (f) { f.className = 'site-footer'; f.innerHTML = footerHTML(); }
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  // Ruban défilant animé (style tech), juste sous l'en-tête
+  if (h && !document.querySelector('.marquee')) {
+    const items = ['Impression 3D', 'Figurines', 'Sur mesure', 'Fait main', 'Livraison soignée', 'Paiement sécurisé', 'ALYA'];
+    const seq = items.map((t) => `${t}<b>✦</b>`).join('').repeat(2);
+    const m = document.createElement('div');
+    m.className = 'marquee';
+    m.setAttribute('aria-hidden', 'true');
+    m.innerHTML = `<div class="marquee-track"><span>${seq}</span><span>${seq}</span></div>`;
+    h.after(m);
+  }
 }
 
 /* ====== PANIER (stocké dans le navigateur) ====== */
