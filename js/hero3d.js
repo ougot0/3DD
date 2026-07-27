@@ -76,24 +76,15 @@ async function boot() {
     const box = new THREE.Box3().setFromObject(obj);
     const size = new THREE.Vector3(); box.getSize(size);
     const center = new THREE.Vector3(); box.getCenter(center);
-    obj.position.sub(center);                         // centre à l'origine
     const maxDim = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 3.4 / maxDim;
-    obj.scale.setScalar(scale);
 
-    // Orientation « dans le bon sens » : debout, face à la caméra.
-    // Ajustable sans toucher au JS via data-rot-x / -y / -z (en degrés)
-    const d2r = Math.PI / 180;
-    obj.rotation.x = (parseFloat(frame.dataset.rotX) || 0) * d2r;
-    obj.rotation.y = (parseFloat(frame.dataset.rotY) || 0) * d2r;
-    obj.rotation.z = (parseFloat(frame.dataset.rotZ) || 0) * d2r;
-
-    // S'assurer que les matériaux réagissent bien à la lumière
+    // Matériaux : bien réagir à la lumière, texture en sRGB, double face
     obj.traverse((ch) => {
       if (ch.isMesh && ch.material) {
         const mats = Array.isArray(ch.material) ? ch.material : [ch.material];
         mats.forEach((m) => {
           if (m.map) m.map.colorSpace = THREE.SRGBColorSpace;
+          m.side = THREE.DoubleSide;
           if ('metalness' in m) m.metalness = Math.min(m.metalness ?? 0.2, 0.35);
           if ('roughness' in m) m.roughness = Math.max(m.roughness ?? 0.6, 0.45);
           m.needsUpdate = true;
@@ -101,29 +92,48 @@ async function boot() {
       }
     });
 
-    pivot.add(obj);
+    // Recentrage + mise à l'échelle robustes :
+    //  - on translate le modèle DANS un holder pour centrer son contenu à l'origine
+    //  - on met le holder à l'échelle (le centre reste à l'origine → rotation sur place)
+    const holder = new THREE.Group();
+    holder.add(obj);
+    obj.position.sub(center);
+    holder.scale.setScalar(3.4 / maxDim);
+
+    // Orientation « dans le bon sens » : debout, face à la caméra.
+    // Ajustable sans toucher au JS via data-rot-x / -y / -z (en degrés)
+    const d2r = Math.PI / 180;
+    holder.rotation.x = (parseFloat(frame.dataset.rotX) || 0) * d2r;
+    holder.rotation.y = (parseFloat(frame.dataset.rotY) || 0) * d2r;
+    holder.rotation.z = (parseFloat(frame.dataset.rotZ) || 0) * d2r;
+
+    pivot.add(holder);
     frame.innerHTML = '';
     frame.appendChild(renderer.domElement);
   },
   undefined,
   (err) => { console.warn('[ALYA] Échec chargement FBX', err); fallback(); });
 
-  // Interaction : glisser pour tourner, sinon rotation auto lente
-  let autoRot = true, dragging = false, px = 0, targetY = 0, curY = 0;
-  frame.addEventListener('pointerdown', (e) => { dragging = true; autoRot = false; px = e.clientX; renderer.domElement.style.cursor = 'grabbing'; });
+  // Rotation 3D : balancement continu (montre le relief & les côtés,
+  // le logo reste toujours lisible). Glisser pour tourner à la main :
+  // l'objet suit le doigt puis revient doucement au balancement.
+  const AMPL = 0.62;      // amplitude du balancement (~35°)
+  const SPEED = 0.55;     // vitesse du balancement
+  let dragging = false, px = 0, manual = 0, t = 0;
+  frame.addEventListener('pointerdown', (e) => { dragging = true; px = e.clientX; renderer.domElement.style.cursor = 'grabbing'; });
   addEventListener('pointerup', () => { dragging = false; renderer.domElement.style.cursor = 'grab'; });
   addEventListener('pointermove', (e) => {
     if (!dragging) return;
-    targetY += (e.clientX - px) * 0.01; px = e.clientX;
+    manual += (e.clientX - px) * 0.012; px = e.clientX;
   });
 
   const clock = new THREE.Clock();
   function tick() {
     requestAnimationFrame(tick);
     const dt = clock.getDelta();
-    if (autoRot) targetY += dt * 0.45;          // rotation lente
-    curY += (targetY - curY) * 0.12;            // lissage
-    pivot.rotation.y = curY;
+    t += dt;
+    if (!dragging) manual *= 0.94;              // revient au balancement après un glisser
+    pivot.rotation.y = Math.sin(t * SPEED) * AMPL + manual;
     renderer.render(scene, camera);
   }
   tick();
