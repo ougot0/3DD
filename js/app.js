@@ -45,7 +45,7 @@ function currentPage() {
 
 function brandHTML(withTag) {
   return `<a class="brand" href="index.html">
-    <span class="mark">${ICON.logo}</span>
+    <span class="mark"><img src="assets/img/logo-alya.png" alt="Logo ALYA" width="40" height="40"></span>
     <span>${SHOP.name}${withTag ? `<small>${SHOP.tagline}</small>` : ''}</span>
   </a>`;
 }
@@ -484,28 +484,34 @@ function initIntro() {
   setTimeout(close, 3300);
 }
 
-/* ====== Cube 3D interactif dans le hero (adapté aux objets 3D) ====== */
-function initHero3D() {
-  document.querySelectorAll('.hero-frame').forEach((frame) => {
-    frame.classList.add('cube-host');
-    frame.innerHTML =
-      '<div class="cube-scene"><div class="cube">' +
-      '<div class="face front">ALYA</div>' +
-      '<div class="face back">3D</div>' +
-      '<div class="face right">🖨️</div>' +
-      '<div class="face left">✦</div>' +
-      '<div class="face top">🧊</div>' +
-      '<div class="face bottom">❤</div>' +
-      '</div></div>';
-    const scene = frame.querySelector('.cube-scene');
-    frame.addEventListener('pointermove', (e) => {
-      const r = frame.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      scene.style.transform = `rotateX(${-y * 16}deg) rotateY(${x * 22}deg)`;
-    });
-    frame.addEventListener('pointerleave', () => { scene.style.transform = ''; });
+/* ====== Cube 3D CSS (repli si le modèle FBX ne peut pas charger) ====== */
+function injectHeroCube(frame) {
+  if (!frame || frame.dataset.cubeReady) return;
+  frame.dataset.cubeReady = '1';
+  frame.classList.add('cube-host');
+  frame.innerHTML =
+    '<div class="cube-scene"><div class="cube">' +
+    '<div class="face front">ALYA</div>' +
+    '<div class="face back">3D</div>' +
+    '<div class="face right">🖨️</div>' +
+    '<div class="face left">✦</div>' +
+    '<div class="face top">🧊</div>' +
+    '<div class="face bottom">❤</div>' +
+    '</div></div>';
+  const scene = frame.querySelector('.cube-scene');
+  frame.addEventListener('pointermove', (e) => {
+    const r = frame.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    scene.style.transform = `rotateX(${-y * 16}deg) rotateY(${x * 22}deg)`;
   });
+  frame.addEventListener('pointerleave', () => { scene.style.transform = ''; });
+}
+window.injectHeroCube = injectHeroCube;
+
+/* Cube CSS uniquement pour les cadres SANS modèle 3D (hero3d.js gère data-model) */
+function initHero3D() {
+  document.querySelectorAll('.hero-frame:not([data-model])').forEach(injectHeroCube);
 }
 
 /* ====== Inclinaison 3D des cartes au survol ====== */

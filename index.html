@@ -8,6 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -31,7 +39,7 @@
         </div>
       </div>
       <div class="hero-visual reveal in">
-        <div class="hero-frame" data-cat-art="figurines"></div>
+        <div class="hero-frame" data-cat-art="figurines" data-model="assets/model/logo-alya.fbx"></div>
         <div class="hero-tag">
           <span class="dot"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div><b>Finition soignée</b><span>ponçage & contrôle de chaque pièce</span></div>
@@ -141,7 +149,8 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="js/products.js?v=11"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="js/products.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
+  <script type="module" src="js/hero3d.js?v=12"></script>
 </body>
 </html>
