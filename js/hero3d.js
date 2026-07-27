@@ -82,8 +82,11 @@ async function boot() {
     obj.scale.setScalar(scale);
 
     // Orientation « dans le bon sens » : debout, face à la caméra.
-    // (ajustable d'une seule valeur si besoin après vérif sur le site)
-    obj.rotation.x = 0;
+    // Ajustable sans toucher au JS via data-rot-x / -y / -z (en degrés)
+    const d2r = Math.PI / 180;
+    obj.rotation.x = (parseFloat(frame.dataset.rotX) || 0) * d2r;
+    obj.rotation.y = (parseFloat(frame.dataset.rotY) || 0) * d2r;
+    obj.rotation.z = (parseFloat(frame.dataset.rotZ) || 0) * d2r;
 
     // S'assurer que les matériaux réagissent bien à la lumière
     obj.traverse((ch) => {
