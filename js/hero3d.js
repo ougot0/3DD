@@ -51,20 +51,21 @@ async function boot() {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, W() / H(), 0.1, 2000);
-  camera.position.set(0, 0, 6);
+  camera.position.set(0, 0.7, 6);       // légère plongée → rendu 3/4 plus dynamique
+  camera.lookAt(0, 0, 0);
 
-  // Éclairage : ambiance douce + accents violet / bleu (identité ALYA)
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x2a2350, 1.05));
-  const key = new THREE.DirectionalLight(0xffffff, 1.7);
-  key.position.set(4, 6, 7);
+  // Éclairage : ambiance douce + lumière clé + accents violets « stylés »
+  // qui tournent autour du logo pour faire glisser des reflets sur la matière.
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x241a44, 0.9));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.28));
+  const key = new THREE.DirectionalLight(0xffffff, 1.5);
+  key.position.set(3, 5, 7);
   scene.add(key);
-  const violet = new THREE.DirectionalLight(0x8b5cff, 1.1);
-  violet.position.set(-6, 2, 3);
-  scene.add(violet);
-  const bleu = new THREE.DirectionalLight(0x3da5ff, 1.0);
-  bleu.position.set(3, -4, -5);
-  scene.add(bleu);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  // Spots violet + bleu qui orbitent (animés dans la boucle de rendu)
+  const violet = new THREE.PointLight(0x8b5cff, 60, 40, 2);
+  const bleu   = new THREE.PointLight(0x3aa0ff, 42, 40, 2);
+  const rim    = new THREE.PointLight(0xa06bff, 34, 40, 2);
+  scene.add(violet, bleu, rim);
 
   // Groupe pivot pour la rotation automatique
   const pivot = new THREE.Group();
@@ -114,17 +115,15 @@ async function boot() {
   undefined,
   (err) => { console.warn('[ALYA] Échec chargement FBX', err); fallback(); });
 
-  // Rotation 3D : balancement continu (montre le relief & les côtés,
-  // le logo reste toujours lisible). Glisser pour tourner à la main :
-  // l'objet suit le doigt puis revient doucement au balancement.
-  const AMPL = 0.62;      // amplitude du balancement (~35°)
-  const SPEED = 0.55;     // vitesse du balancement
-  let dragging = false, px = 0, manual = 0, t = 0;
+  // Rotation 3D automatique, continue et lente (tour complet).
+  // On peut aussi glisser à la souris ; la rotation auto reprend ensuite.
+  const SPEED = 0.42;     // vitesse de rotation auto (~15 s le tour)
+  let dragging = false, px = 0, angle = 0, t = 0;
   frame.addEventListener('pointerdown', (e) => { dragging = true; px = e.clientX; renderer.domElement.style.cursor = 'grabbing'; });
   addEventListener('pointerup', () => { dragging = false; renderer.domElement.style.cursor = 'grab'; });
   addEventListener('pointermove', (e) => {
     if (!dragging) return;
-    manual += (e.clientX - px) * 0.012; px = e.clientX;
+    angle += (e.clientX - px) * 0.01; px = e.clientX;
   });
 
   const clock = new THREE.Clock();
@@ -132,8 +131,14 @@ async function boot() {
     requestAnimationFrame(tick);
     const dt = clock.getDelta();
     t += dt;
-    if (!dragging) manual *= 0.94;              // revient au balancement après un glisser
-    pivot.rotation.y = Math.sin(t * SPEED) * AMPL + manual;
+    if (!dragging) angle += dt * SPEED;         // tourne tout seul, doucement
+    pivot.rotation.y = angle;
+
+    // Spots violets « stylés » qui orbitent → reflets qui glissent sur le logo
+    violet.position.set(Math.cos(t * 0.9) * 4.5, 1.8, Math.sin(t * 0.9) * 4.5 + 2);
+    bleu.position.set(Math.cos(t * 0.9 + 2.4) * 4.5, -1.5, Math.sin(t * 0.9 + 2.4) * 4.5 + 2);
+    rim.position.set(Math.cos(t * 0.5 + 3.14) * 3.5, 2.5, Math.sin(t * 0.5 + 3.14) * 3.5 - 3);
+
     renderer.render(scene, camera);
   }
   tick();
